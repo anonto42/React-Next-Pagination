@@ -90,12 +90,16 @@ const Header = () => {
 
     {
       isNewGroup && (
-        <NewGroupe />
+        <Suspense fallback={<Backdrop open />} >
+          <NewGroupe />
+        </Suspense>
       )
     }
     {
       isNotification && (
-        <NotificationBox />
+        <Suspense fallback={<Backdrop open />} >
+          <Notification />
+        </Suspense>
       )
     }
 
