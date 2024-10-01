@@ -2,18 +2,23 @@ import React from 'react'
 import Header from './Header'
 import Title from './../Shared/Title';
 import { Grid } from '@mui/material';
+import ChatList from '../Specific/ChatList';
+import { chatsData } from '../../libs/sampleData';
+import { useParams } from 'react-router-dom';
 
 const AppLayout = () => WrappedComponent => {
   return (props) => {
-
-
-
+    const params = useParams();
+    const chatId = params.id
+    console.log(chatId)
     return (
         <>
             <Title />
             <Header/>
             <Grid container height={"calc(100vh - 4rem)"} >
-                <Grid item sm={4} md={3} sx={{display:{ xs: "none" , sm: "block" }}} height={"100%"} >first</Grid>
+                <Grid item sm={4} md={3} sx={{display:{ xs: "none" , sm: "block" }}} height={"100%"} >
+                  <ChatList chats={chatsData} chatId={chatId} newMessagesAlert={{chatId,count:"1"}}  onlineUsers={true} />
+                </Grid>
                 <Grid item xs={12} sm={8} md={5} lg={6} height={"100%"} bgcolor={"primary.main"}>
                     <WrappedComponent {...props} />
                 </Grid>

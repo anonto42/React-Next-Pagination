@@ -1,6 +1,5 @@
 import { styled  } from "@mui/material";
 
-
 export const VisuallyHidden = styled("input")({
     border: 0,
     clip: "rect(0 0 0 0)",
