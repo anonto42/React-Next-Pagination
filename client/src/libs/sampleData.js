@@ -1,6 +1,4 @@
 
-
- 
  const chatsData = [
    {
     avatar:["https://scontent.fdac157-1.fna.fbcdn.net/v/t39.30808-1/449132468_444428191750537_1696967288805001362_n.jpg?stp=c152.0.1703.1703a_dst-jpg_s160x160&_nc_cat=108&ccb=1-7&_nc_sid=0ecb9b&_nc_eui2=AeHDu42KV7K9LJ5Ptn9U2Hawh4K49k_OCNGHgrj2T84I0XJf0w-cDfW96omO3xoyubR5sVosBwZJ9nceE7Vkistu&_nc_ohc=kzPJ8nb_tk8Q7kNvgGFA5LN&_nc_ht=scontent.fdac157-1.fna&_nc_gid=Aenealjpx8gu0YvXjpYz2gU&oh=00_AYCi9ZJjc9dd_ZECIMLWeinDRlEU6YYlCRLvcvlJ5fUE3Q&oe=67020BBD"],
@@ -18,8 +16,53 @@
       _id:"12",
       groupChat:true,
       members:["1","2"]
-     }
+     },
+     {
+      avatar:["https://scontent.fdac157-1.fna.fbcdn.net/v/t39.30808-1/449132468_444428191750537_1696967288805001362_n.jpg?stp=c152.0.1703.1703a_dst-jpg_s160x160&_nc_cat=108&ccb=1-7&_nc_sid=0ecb9b&_nc_eui2=AeHDu42KV7K9LJ5Ptn9U2Hawh4K49k_OCNGHgrj2T84I0XJf0w-cDfW96omO3xoyubR5sVosBwZJ9nceE7Vkistu&_nc_ohc=kzPJ8nb_tk8Q7kNvgGFA5LN&_nc_ht=scontent.fdac157-1.fna&_nc_gid=Aenealjpx8gu0YvXjpYz2gU&oh=00_AYCi9ZJjc9dd_ZECIMLWeinDRlEU6YYlCRLvcvlJ5fUE3Q&oe=67020BBD"],
+      name:"Sohidul Islam",
+      _id:"123",
+      groupChat:false,
+      members:["1","2"]
+     },
+     {
+      avatar:["https://scontent.fdac157-1.fna.fbcdn.net/v/t39.30808-1/449132468_444428191750537_1696967288805001362_n.jpg?stp=c152.0.1703.1703a_dst-jpg_s160x160&_nc_cat=108&ccb=1-7&_nc_sid=0ecb9b&_nc_eui2=AeHDu42KV7K9LJ5Ptn9U2Hawh4K49k_OCNGHgrj2T84I0XJf0w-cDfW96omO3xoyubR5sVosBwZJ9nceE7Vkistu&_nc_ohc=kzPJ8nb_tk8Q7kNvgGFA5LN&_nc_ht=scontent.fdac157-1.fna&_nc_gid=Aenealjpx8gu0YvXjpYz2gU&oh=00_AYCi9ZJjc9dd_ZECIMLWeinDRlEU6YYlCRLvcvlJ5fUE3Q&oe=67020BBD"],
+      name:"Sohidul Islam",
+      _id:"123",
+      groupChat:false,
+      members:["1","2"]
+     },
+     {
+      avatar:["https://scontent.fdac157-1.fna.fbcdn.net/v/t39.30808-1/449132468_444428191750537_1696967288805001362_n.jpg?stp=c152.0.1703.1703a_dst-jpg_s160x160&_nc_cat=108&ccb=1-7&_nc_sid=0ecb9b&_nc_eui2=AeHDu42KV7K9LJ5Ptn9U2Hawh4K49k_OCNGHgrj2T84I0XJf0w-cDfW96omO3xoyubR5sVosBwZJ9nceE7Vkistu&_nc_ohc=kzPJ8nb_tk8Q7kNvgGFA5LN&_nc_ht=scontent.fdac157-1.fna&_nc_gid=Aenealjpx8gu0YvXjpYz2gU&oh=00_AYCi9ZJjc9dd_ZECIMLWeinDRlEU6YYlCRLvcvlJ5fUE3Q&oe=67020BBD"],
+      name:"Sohidul Islam",
+      _id:"123",
+      groupChat:false,
+      members:["1","2"]
+     },
+]
+
+const notificationData = [
+   {
+      sender:{
+         avatar: "",
+         name:"chuki muk"
+      },
+      _id:"123123"
+   },
+   {
+      sender:{
+         avatar: "",
+         name:"chuki muk"
+      },
+      _id:"123123"
+   },
+   {
+      sender:{
+         avatar: "",
+         name:"chuki muk"
+      },
+      _id:"123123"
+   },
 ]
 
 
-export { chatsData }
+export { chatsData , notificationData}
