@@ -5,7 +5,6 @@ import { Add, Group, Logout, Menu as MenuIcon , NotificationAdd, Notifications, 
 import { useNavigate } from'react-router-dom'
 import SearchBox from './../Specific/Search';
 import NewGroupe from './../Specific/NewGroupe';
-import Notification from './../Specific/Notification';
 import NotificationBox from './../Specific/Notification'
 
 const Header = () => {
@@ -98,7 +97,7 @@ const Header = () => {
     {
       isNotification && (
         <Suspense fallback={<Backdrop open />} >
-          <Notification />
+          <NotificationBox />
         </Suspense>
       )
     }
