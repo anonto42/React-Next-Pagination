@@ -10,7 +10,7 @@ const ChatList= ({chats , w ="100%" , newMessagesAlert = [ { chatId:"" , count:0
           chats?.map((data,index)=>{
             const { avatar,name,_id,groupChat,members} = data ;
 
-              return <div>
+              return <div key={index}>
                 <ChatItem newMessage={newMessagesAlert} isOnlie={onlineUsers} index={index} avatar={avatar} name={name} _id={_id} key={_id} groupChat={groupChat} sameSender={chatId === _id } handelDeleteChateOpen={handleDeleteChat} />
               </div>
           })
