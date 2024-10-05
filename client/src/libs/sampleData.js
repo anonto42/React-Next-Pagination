@@ -46,21 +46,21 @@ const notificationData = [
          avatar: "",
          name:"chuki muk"
       },
-      _id:"123123"
+      _id:"1"
    },
    {
       sender:{
          avatar: "",
          name:"chuki muk"
       },
-      _id:"123123"
+      _id:"2"
    },
    {
       sender:{
          avatar: "",
          name:"chuki muk"
       },
-      _id:"123123"
+      _id:"3"
    },
 ]
 
