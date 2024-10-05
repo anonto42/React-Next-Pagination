@@ -1,30 +1,51 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Avatar, Button, Dialog, DialogTitle, InputAdornment, List, ListItem, ListItemText, Stack, TextField, Typography } from "@mui/material"
 import { notificationData } from '../../libs/sampleData'
 import UserItem from '../Shared/UserItem'
+import { useInputValidation } from '6pp';
 
 
 const NewGroupe = () => {
-  const selectMemberHandler = () => {}
-  return <Dialog open >
-  <Stack sx={{xs:"1rem",sm:"2rem",width:'350px', px:"20px"}} maxWidth={"35rem"}>
+  const [ selectedMembers , setSelectedMembers ] = useState([]);
+  const [ members , setMembers ] = useState(notificationData);
+
+  const groupName = useInputValidation("")
+
+  const selectMemberHandler = (id) => {
+
+    // setMembers( prevous => prevous.map(i => i._id === id? {...i , isAdded: !i.isAdded } : i))
+
+    setSelectedMembers( prevous => prevous.includes(id)? prevous.filter( i => i !== id ) : [...prevous , id])
+
+  }
+  console.log(selectedMembers)
+
+  const submitHendaler = () => {
+    console.log("submit")
+  }
+
+  const closeHandler = () => {}
+
+
+  return <Dialog open onClose={closeHandler}>
+  <Stack sx={{xs:"1rem",sm:"2rem",width:'350px', px:"20px"}} >
     <DialogTitle>New Group</DialogTitle>
 
-    <TextField />
+    <TextField label="Group Name" value={groupName.value} onChange={groupName.changeHandler} />
 
-    <Typography>Members</Typography>
+    <Typography spacing={"5rem"} variant='body1'>Members</Typography>
 
       <Stack >
         {
-          notificationData.map( i => (
-            <UserItem user={i} key={i._id} handler={selectMemberHandler} />
+          members.map( i => (
+            <UserItem user={i} key={i._id} handler={selectMemberHandler} isAdded={selectedMembers.includes(i._id)}/>
           ))
         }
       </Stack>
 
-      <Stack direction={"row"} sx={{display:"flex",justifyContent:"space-between",m:"20px"}} >
+      <Stack direction={"row"} sx={{display:"flex",justifyContent:"space-evenly",m:"20px"}} >
         <Button variant='text' color='error'>Cancel</Button>
-        <Button variant='contained'>Create</Button>
+        <Button variant='contained' onClick={submitHendaler}>Create</Button>
       </Stack>
   </Stack>
 </Dialog>
