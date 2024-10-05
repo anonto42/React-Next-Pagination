@@ -11,3 +11,13 @@ export const VisuallyHidden = styled("input")({
     whiteSpace: "nowrap",
     width: "1px"
 })
+
+export const InputBox = styled("input")`
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 0 3rem;
+    border-radius: 1.5rem;
+    background-color: rgba(255,255,255,0.8);
+`
