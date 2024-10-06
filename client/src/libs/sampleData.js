@@ -43,7 +43,7 @@
 const notificationData = [
    {
       sender:{
-         avatar: "",
+         avatar: "http://res.cloudinary.com/ddsnont4o/image/upload/v1726732054/gdwqaumewaqqagsxeoo2.png",
          name:"chuki muk"
       },
       _id:"1"
@@ -51,18 +51,46 @@ const notificationData = [
    {
       sender:{
          avatar: "",
-         name:"chuki muk"
+         name:"mahi khan"
       },
       _id:"2"
    },
    {
       sender:{
          avatar: "",
-         name:"chuki muk"
+         name:"Banchod"
       },
       _id:"3"
    },
+]           
+
+const sampleMessage = [
+   {
+      attachments:[
+         {
+            public_id:"1",
+            url:"http://res.cloudinary.com/ddsnont4o/image/upload/v1726732054/gdwqaumewaqqagsxeoo2.png"
+         }
+      ],
+      content:"",
+      sender:{
+         _id:"user._id",
+         name:"sohidul islam ananto"
+      },
+      chat:"chat id",
+      createdAt: new Date()
+   },
+   {
+      attachments:[
+      ],
+      content:"Fuck you bro and I will fuck your as...",
+      sender:{
+         _id:"askdasdf",
+         name:"sohidul islam ananto"
+      },
+      chat:"chat id",
+      createdAt: new Date()
+   },
 ]
 
-
-export { chatsData , notificationData}
+export { chatsData , notificationData , sampleMessage }
