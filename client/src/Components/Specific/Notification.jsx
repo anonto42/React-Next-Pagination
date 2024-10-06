@@ -9,7 +9,7 @@ const NotificationBox = () => {
   }
 
   return <Dialog open >
-    <Stack sx={{xs:"1rem",sm:"2rem"}} maxWidth={"25rem"}>
+    <Stack sx={{xs:"1rem",sm:"2rem"}} maxWidth={"25rem"} pb={"12px"}>
       <DialogTitle>Notifications</DialogTitle>
       {
         notificationData.length > 0 ? (
@@ -22,7 +22,7 @@ const NotificationBox = () => {
 
 const Notificationitem =memo(({ sender , _id , handler }) => {
   return<ListItem>
-  <Stack direction={"row"} alignItems={"center"} spacing={"1rem"} width={"100%"}>
+  <Stack direction={"row"} alignItems={"center"} spacing={"1rem"} width={"100%"} >
       <Avatar />
       <Typography variant='body1' sx={{flexGlow:1,display:"-webkit-box",WebkitLineClamp:1,WebkitBoxOrient:"vertical",overflow:"hidden",textOverflow:"ellipsis",width:"100%"}}>{sender.name}</Typography>
       <Stack direction={{xs:"column",sm:"row"}}>
