@@ -5,22 +5,36 @@ import { AttachFileOutlined, Send } from '@mui/icons-material';
 import { InputBox } from '../Components/styles/StyledCompo';
 import { orange } from '../utils/color';
 import FileManue from '../Components/Shared/FileManue';
+import { sampleMessage } from '../libs/sampleData';
+import MessageCO from '../Components/Shared/MessageCO';
 
 
 const Chate = () => {
 
+  const user ={
+    _id:"askdasdf",
+    name:"John Doe"
+  }
+
   const containerRef =  useRef(null);
 
-  const fileManueRef = useRef(null);
-
   return <>
-    <Stack ref={containerRef} boxSizing={"border-box"} padding={"1rem"} spacing={"1rem"} bgcolor={"gray"} height={"90%"} sx={{overflowX:"hidden",overflowY:"auto"}}>
+    <Stack ref={containerRef} boxSizing={"border-box"} padding={"1rem"} spacing={"1rem"} bgcolor={""} height={"90%"} sx={{overflowX:"hidden",overflowY:"auto"}}>
       {/* {  Messages Render } */}
+
+      {
+        sampleMessage.map((i,index)=> (
+          <MessageCO message={i} key={index} user={user} />
+        ))
+      }
+
+
     </Stack>
+
     <form style={{height:"10%"}}>
       <Stack direction={"row"} sx={{}} height={"100%"} p={"1rem"} alignItems={"center"} position={"relative"}>
 
-        <IconButton sx={{position:"absolute",left:"1.5rem",rotate:"30deg"}} ref={fileManueRef}>
+        <IconButton sx={{position:"absolute",left:"1.5rem",rotate:"30deg"}} >
           <AttachFileOutlined />
         </IconButton>
 
@@ -32,7 +46,7 @@ const Chate = () => {
 
       </Stack>
     </form>
-    <FileManue anchorE1={fileManueRef.current}/>
+    <FileManue />
   </>
   
 }
