@@ -40,7 +40,9 @@ const Header = () => {
       <AppBar position='static' sx={{bgcolor:orange}} >
         <Toolbar >
           <Typography variant='h5' sx={{display:{sx:"none", sm:"block"}}}>
-            Chatapp
+            <a href="/" style={{textDecoration:"none"}}>
+              Stra chate
+            </a>
           </Typography>
           <Box sx={{flexGrow:1}} />
           <Box >
