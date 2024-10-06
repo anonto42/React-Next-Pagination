@@ -33,12 +33,12 @@ const NewGroupe = () => {
 
     <TextField label="Group Name" value={groupName.value} onChange={groupName.changeHandler} />
 
-    <Typography spacing={"5rem"} variant='body1'>Members</Typography>
+    <Typography spacing={"5rem"} variant='body1' mt={"5px"}>Members</Typography>
 
       <Stack >
         {
           members.map( i => (
-            <UserItem user={i} key={i._id} handler={selectMemberHandler} isAdded={selectedMembers.includes(i._id)}/>
+            <UserItem user={i.sender} key={i._id} handler={selectMemberHandler} isAdded={selectedMembers.includes(i._id)}/>
           ))
         }
       </Stack>
