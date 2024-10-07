@@ -3,10 +3,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectRoute from './utils/ProtectRoute';
 import NotFound from './pages/NotFound';
 import Loaders from './Components/Layout/Loaders';
+
 const Home = lazy(() => import('./pages/Home'));
 const Auth = lazy(() => import('./pages/Auth'));
 const Chat = lazy(() => import('./pages/Chate'));
 const Group = lazy(() => import('./pages/Groups'));
+const Admin = lazy(() => import("./pages/AdminPage"))
+const AdminLogin = lazy(() => import("./pages/AdminLogin"))
 
 const App = () => {
 
@@ -27,6 +30,8 @@ const App = () => {
             </ProtectRoute>
             } />
 
+            <Route path='/admin' element={<AdminLogin />} />
+            <Route path='/admin/dashboard' element={<Admin />} />
             <Route path="*" element={<NotFound/>} /> 
             
         </Routes>
