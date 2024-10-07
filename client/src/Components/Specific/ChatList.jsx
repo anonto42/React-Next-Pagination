@@ -1,11 +1,12 @@
 import { Stack } from '@mui/material'
 import React from 'react'
 import ChatItem from '../Shared/ChatItem'
+import { orange } from '../../utils/color'
 
 const ChatList= ({chats , w ="100%" , newMessagesAlert = [ { chatId:"" , count:0}] , onlineUsers,chatId,handleDeleteChat}) => {
     
     
-    return <Stack w={w} direction={"column"}>
+    return <Stack bgcolor={orange} w={w} direction={"column"} overflow={"auto"} height={"100%"}>
       {
           chats?.map((data,index)=>{
             const { avatar,name,_id,groupChat,members} = data ;
