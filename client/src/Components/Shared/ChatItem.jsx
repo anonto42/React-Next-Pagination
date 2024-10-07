@@ -18,6 +18,7 @@ const ChatItem = ({
   <div style={{
     textDecoration: 'none',
     color: 'black',
+    borderBottom:"2px solid rgba(0,0,0,0.2)"
   }}
   sx
   >
