@@ -3,7 +3,7 @@ import React from 'react'
 import { transformImage } from '../../libs/features'
 
 const AwatarCart = ({ avatar=[] , max = 3 }) => {
-  return <Stack direction={"row"} spacing={0.5}>
+  return <Stack direction={"row"} position={"relative"} spacing={0.5}>
     <AvatarGroup max={max}>
         <Box width={"5rem"} height={"3rem"}>
             {
