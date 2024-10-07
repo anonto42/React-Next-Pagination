@@ -6,6 +6,7 @@ import { useInputValidation } from '6pp';
 
 
 const NewGroupe = () => {
+  
   const [ selectedMembers , setSelectedMembers ] = useState([]);
   const [ members , setMembers ] = useState(notificationData);
 
@@ -18,7 +19,6 @@ const NewGroupe = () => {
     setSelectedMembers( prevous => prevous.includes(id)? prevous.filter( i => i !== id ) : [...prevous , id])
 
   }
-  console.log(selectedMembers)
 
   const submitHendaler = () => {
     console.log("submit")
