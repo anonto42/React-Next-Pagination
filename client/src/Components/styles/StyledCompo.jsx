@@ -21,3 +21,27 @@ export const InputBox = styled("input")`
     border-radius: 1.5rem;
     background-color: rgba(255,255,255,0.8);
 `
+
+
+export const SerchFild = styled("input")`
+    padding: 1rem 2rem;
+    width: 27vmax;
+    border: none;
+    outline: none;
+    background-color: #f1f1f1;
+    font-size: 1.1rem;
+    border-radius: 1.5rem;
+`
+
+export const CurveButton = styled("button")`
+    border-radius:1.5rem;
+    padding: 0.9rem 2rem;
+    background-color: black;
+    border:none;
+    outline:none;
+    color: white;
+    font-size:1.1rem;
+    &:hover{
+        background-color: rgba(0,0,0,0.8);
+    }
+`
