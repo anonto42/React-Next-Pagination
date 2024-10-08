@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Box, Drawer, Grid, IconButton, Stack, styled, Typography } from '@mui/material';
 import { gray } from '../../utils/color';
-import { Close, Dashboard, ExitToApp, Group, ManageAccounts, Menu, Message } from '@mui/icons-material';
+import { Close, Dashboard, ExitToApp, Group, ManageAccounts, Menu, Message, Person } from '@mui/icons-material';
 import { Link as LinkComponent, Navigate } from 'react-router-dom';
 
 const AdminLayout = ({ children }) => {
@@ -66,7 +66,7 @@ const SideBar = ({ w="100%"}) => {
         {
             name:"Users",
             path:"/admin/dashboard/user-manage",
-            icon:<ManageAccounts />
+            icon:<Person />
         },
         {
             name:"Chats",
