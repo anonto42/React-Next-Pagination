@@ -93,4 +93,24 @@ const sampleMessage = [
    },
 ]
 
-export { chatsData , notificationData , sampleMessage }
+const dashBoardData = {
+   users:[
+      {
+         name:"jcooo kok",
+         avatar:"",
+         _id:"1",
+         username:"jasoa_alsdf",
+         friends:10,
+         groups:4
+      },{
+         name:"kaki",
+         avatar:"",
+         _id:"12",
+         username:"aaoa_alas",
+         friends:10,
+         groups:4
+      },
+   ]
+}
+
+export { chatsData , notificationData , sampleMessage , dashBoardData  }
