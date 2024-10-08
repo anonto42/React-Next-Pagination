@@ -65,17 +65,17 @@ const SideBar = ({ w="100%"}) => {
         },
         {
             name:"Users",
-            path:"/admin/user-management",
+            path:"/admin/dashboard/user-manage",
             icon:<ManageAccounts />
         },
         {
             name:"Chats",
-            path:"/admin/chats-management",
+            path:"/admin/dashboard/chat-manage",
             icon:<Group />
         },
         {
             name:"Messages",
-            path:"/admin/messages",
+            path:"/admin/dashboard/message-manage",
             icon:<Message />
         }
     ]
