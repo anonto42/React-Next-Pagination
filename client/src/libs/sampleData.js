@@ -110,6 +110,86 @@ const dashBoardData = {
          friends:10,
          groups:4
       },
+   ],
+   chats:[
+      {
+         name:"sohidul islam",
+         avatar:[ "http://res.cloudinary.com/ddsnont4o/image/upload/v1726732054/gdwqaumewaqqagsxeoo2.png" ],
+         _id:"12345",
+         groupChat:false,
+         members:[
+            {
+               _id:"1",
+               avatar:"http://res.cloudinary.com/ddsnont4o/image/upload/v1726732054/gdwqaumewaqqagsxeoo2.png"
+            },
+            {
+               _id:"1",
+               avatar:"http://res.cloudinary.com/ddsnont4o/image/upload/v1726732054/gdwqaumewaqqagsxeoo2.png"
+            }],
+         totalMembers:2,
+         totalMessages:20,
+         creator:{
+            name:"jonray ray",
+            avatar:"http://res.cloudinary.com/ddsnont4o/image/upload/v1726732054/gdwqaumewaqqagsxeoo2.png"
+         }
+       },{
+         name:"gloga glow",
+         avatar:[ "http://res.cloudinary.com/ddsnont4o/image/upload/v1726732054/gdwqaumewaqqagsxeoo2.png" ],
+         _id:"12",
+         groupChat:false,
+         members:[
+            {
+               _id:"1",
+               avatar:"http://res.cloudinary.com/ddsnont4o/image/upload/v1726732054/gdwqaumewaqqagsxeoo2.png"
+            },
+            {
+               _id:"1",
+               avatar:"http://res.cloudinary.com/ddsnont4o/image/upload/v1726732054/gdwqaumewaqqagsxeoo2.png"
+            }],
+         totalMembers:2,
+         totalMessages:20,
+         creator:{
+            name:"jonray ray",
+            avatar:"http://res.cloudinary.com/ddsnont4o/image/upload/v1726732054/gdwqaumewaqqagsxeoo2.png"
+         }
+       },
+   ],
+   message:[
+      {
+         attachments:[
+            {
+               public_id:"1",
+               url:"http://res.cloudinary.com/ddsnont4o/image/upload/v1726732054/gdwqaumewaqqagsxeoo2.png"
+            }
+         ],
+         content:"",
+         _id:"a;slkdf",
+         groupChat:false,
+         sender:{
+            _id:"1",
+            name:"sohidul islam ananto",
+            avatar:"http://res.cloudinary.com/ddsnont4o/image/upload/v1726732054/gdwqaumewaqqagsxeoo2.png"
+         },
+         chat:"12345",
+         createdAt: new Date()
+      },{
+         attachments:[
+            {
+               public_id:"1",
+               url:"http://res.cloudinary.com/ddsnont4o/image/upload/v1726732054/gdwqaumewaqqagsxeoo2.png"
+            }
+         ],
+         content:"",
+         _id:"a;slkdf",
+         groupChat:false,
+         sender:{
+            _id:"1",
+            name:"sohidul islam ananto",
+            avatar:"http://res.cloudinary.com/ddsnont4o/image/upload/v1726732054/gdwqaumewaqqagsxeoo2.png"
+         },
+         chat:"12345",
+         createdAt: new Date()
+      }
    ]
 }
 
