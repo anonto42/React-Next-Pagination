@@ -1,6 +1,9 @@
 import express from "express";
 import { browser } from "../controllers/user.controller.js";
 
-export const route = express.Route();
+const route = express.Router();
 
-route.route("/user").post( browser )
+route.route("/user").get( browser )
+
+
+export { route }
