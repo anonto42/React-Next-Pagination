@@ -1,21 +1,8 @@
-import { Schema , model } from 'mongoose';
+import { Schema , Types, model } from 'mongoose';
 
 const messageSchema = new Schema({
-    name:{
-        type:String,
-        requird:true
-    },
-    userName:{
-        type:String,
-        required:true,
-        unique:true
-    },
-    password:{
-        type:String,
-        required:true,
-        select:false
-    },
-    avatar:{
+    content:String,
+    attachments:[{
         public_id:{
             type:String,
             required:true
@@ -24,6 +11,16 @@ const messageSchema = new Schema({
             type: String,
             requird: true
         }
+    }],
+    sender:{
+        type:Types.ObjectId,
+        ref:"User",
+        required:true
+    },
+    chat:{
+        type: Types.ObjectId,
+        ref:"Chat",
+        required:true
     }
 },{timestamps:true});
 

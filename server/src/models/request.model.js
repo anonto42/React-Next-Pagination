@@ -1,24 +1,21 @@
 import mongoose, { Schema , Types, model } from 'mongoose';
 
 const requestSchema = new Schema({
-    name:{
+    status:{
         type:String,
-        requird:true
+        enum:['pending','accepted','rejected'],
+        default:'pending'
     },
-    groupChat:{
-        type:String,
-        default:false
+    sender:{
+        type:Types.ObjectId,
+        ref:"User",
+        required:true
     },
-    creator:{
+    receiver:{
         type: Types.ObjectId,
-        ref:"User"
-    },
-    members:[
-        {
-            type: Types.ObjectId,
-            ref:"User"
-        }
-    ]
+        ref:"Chat",
+        required:true
+    }
 },{timestamps:true});
 
 export const RequestModel = model("Request",requestSchema);
