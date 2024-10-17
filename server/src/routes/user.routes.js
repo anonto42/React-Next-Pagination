@@ -1,9 +1,9 @@
 import express from "express";
-import { browser } from "../controllers/user.controller.js";
+import { login } from "../controllers/user.controller.js";
 
 const route = express.Router();
 
-route.route("/user").get( browser )
+route.route("/login").get( login )
 
 
 export { route }
