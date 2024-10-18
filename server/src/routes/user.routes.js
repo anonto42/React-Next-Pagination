@@ -1,9 +1,11 @@
 import express from "express";
-import { login } from "../controllers/user.controller.js";
+import { login, newUser } from "../controllers/user.controller.js";
 
 const route = express.Router();
 
-route.route("/login").get( login )
+route.route("/login").post( login )
+
+route.route("/userCreate").post( newUser )
 
 
 export { route }
