@@ -1,38 +1,53 @@
-import { UserModel } from "../models/user.model.js"
+import { compare } from "bcrypt";
+import { sendToker } from "../middlewares/jwt.js";
+import { UserModel } from "../models/user.model.js";
 
-
-
-export const login = ( req , res ) => {
-    res.json({"done":"Response was successfully sent"})
-}
-
-export const newUser = async ( req , res ) => { 
+export const login = async ( req , res ) => {
     try {
 
-        const avatar = {
-            public_id: "test_public_id",
-            url: "test_url"
-        }
+        const { userName, password } = req.body;
 
-        const userDataForCreate = {
-            name:"anonto",
-            userName:"anonto33",
-            password:"anontopass",
-            avatar
-        }
+        const user = await UserModel.findOne( { userName } ).select( " +password");
+
+        const isMachedPass = await compare( password , user.password );
         
-        const user = await UserModel.create( userDataForCreate )
+        if (!isMachedPass) return res.status(202).json( "Invalid password" );
 
-        res
-        .status(201)
-        .json(
-            {
-                user,
-                message: "User created successfully",
-            }
-        )
+        sendToker( res , user , 200 , `Welcome Back , ${ user.name } `);
 
     } catch (error) {
         console.log(error.message)
     }
 }
+
+export const newUser = async ( req , res ) => { 
+    try {
+
+        const { name , userName , password } = req.body;
+
+        const avatar = {
+            public_id: "test_public_id",
+            url: "test_url"
+        };
+
+        const userDataForCreate = {
+            name,
+            userName,
+            password,
+            avatar
+        };
+
+        const userFunded = await UserModel.findOne( { userName } );
+
+        if ( userFunded ) return res.json( "user was arial exid" );
+        
+        const user = await UserModel.create( userDataForCreate );
+
+        if ( !user ) return res.json( "user was not created" );
+
+        sendToker( res , user , 202 , "User created" );
+
+    } catch (error) {
+        console.log(error.message)
+    };
+};
