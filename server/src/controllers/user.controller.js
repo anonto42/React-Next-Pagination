@@ -1,6 +1,6 @@
 import { compare } from "bcrypt";
-import { sendToker } from "../middlewares/jwt.js";
 import { UserModel } from "../models/user.model.js";
+import { sendRespons } from "../utils/features.js";
 
 export const login = async ( req , res ) => {
     try {
@@ -13,7 +13,7 @@ export const login = async ( req , res ) => {
         
         if (!isMachedPass) return res.status(202).json( "Invalid password" );
 
-        sendToker( res , user , 200 , `Welcome Back , ${ user.name } `);
+        sendRespons( res , user , 200 , `Welcome Back , ${ user.name } `);
 
     } catch (error) {
         console.log(error.message)
@@ -45,7 +45,7 @@ export const newUser = async ( req , res ) => {
 
         if ( !user ) return res.json( "user was not created" );
 
-        sendToker( res , user , 202 , "User created" );
+        sendRespons( res , user , 202 , "User created" );
 
     } catch (error) {
         console.log(error.message)
