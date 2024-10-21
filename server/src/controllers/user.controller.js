@@ -1,4 +1,3 @@
-import { compare } from "bcrypt";
 import { UserModel } from "../models/user.model.js";
 import { sendRespons } from "../utils/features.js";
 
@@ -7,11 +6,13 @@ export const login = async ( req , res ) => {
 
         const { userName, password } = req.body;
 
-        const user = await UserModel.findOne( { userName } ).select( " +password");
+        const user = await UserModel.findOne( { userName } );
 
-        const isMachedPass = await compare( password , user.password );
+        if (!user) return res.status(404).json( "User not mached" )
         
-        if (!isMachedPass) return res.status(202).json( "Invalid password" );
+        const passwordCorrect = await user.isPasswordCorrect( password );
+
+        if (!passwordCorrect) return res.status(202).json( "Invalid password" );
 
         sendRespons( res , user , 200 , `Welcome Back , ${ user.name } `);
 
