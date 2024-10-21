@@ -16,7 +16,7 @@ export const sendRespons = ( res , user , code , message ) => {
     ) ;
     return res 
     .status(code)
-    .cookie( "chat-app" ,token , option )
+    .cookie( "Stra_cookie" ,token , option )
     .json( { 
         success: true,
         token,
