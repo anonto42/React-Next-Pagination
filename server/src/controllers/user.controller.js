@@ -91,3 +91,21 @@ export const getUserProfile = async (req, res) => {
         console.log(error.message)
     }
 }
+
+export const serchUser = async ( req , res ) => {
+    try {
+
+        const { name } = req.query;
+
+
+
+        return res
+        .status(200)
+        .json(
+            name
+        )
+
+    } catch (error) {
+        console.log(error.message)
+    }
+}
