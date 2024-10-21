@@ -21,6 +21,30 @@ export const login = async ( req , res ) => {
     }
 }
 
+export const logout = async ( req , res ) => {
+    try {
+
+        const option = {
+            maxAge : 0,
+            sameSite : "none",
+            httpOnly: true,
+            secure:true
+        }
+
+        return res
+        .status(200)
+        .cookie("Stra_cookie","",option)
+        .json(
+            {
+                message : "Logout successfull",
+            }
+        )
+
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
 export const newUser = async ( req , res ) => { 
     try {
 
@@ -52,3 +76,18 @@ export const newUser = async ( req , res ) => {
         console.log(error.message)
     };
 };
+
+export const getUserProfile = async (req, res) => { 
+    try {
+        const user =  req.userData;
+        
+        if (!user) return res.status(404).json( "User not excited" );
+
+        return res
+        .status(200)
+        .json(user);
+
+    } catch (error) {
+        console.log(error.message)
+    }
+}
