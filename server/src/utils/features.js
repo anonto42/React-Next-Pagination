@@ -24,3 +24,11 @@ export const sendRespons = ( res , user , code , message ) => {
         user
     })
 }
+
+export const emitEvent = (req,event,users,data) => {
+    try {
+        console.log("Emitting event ", event );
+    } catch (error) {
+        console.log(error.message)
+    }
+}
