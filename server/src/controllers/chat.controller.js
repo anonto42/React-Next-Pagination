@@ -117,6 +117,8 @@ export const addMembers = async (req, res) => {
 
         const { chatId, members } = req.body;
 
+        if( members.length < 1 ) return res.status(404).json("Please select a member");
+
         const chat = await ChatModel.findById( chatId );
 
         if( !chat ) return res.json("Chat was not found");
@@ -129,7 +131,11 @@ export const addMembers = async (req, res) => {
         
         const allNewMembers = await Promise.all ( allNewMembersPromis );
 
-        chat.members.push(...allNewMembers.map((i) => i._id))
+        const uniqueMember = allNewMembers
+        .filter( i => !chat.members.includes( i._id.toString()))
+        .map(i => i._id);
+
+        chat.members.push(...uniqueMember);
 
         if(chat.members.length > 12 ) return res.json("Group members limit reached");
 
@@ -160,5 +166,105 @@ export const addMembers = async (req, res) => {
 
     } catch (error) {
         console.log(error)
+    }
+}
+
+export const removeMember = async (req, res) => {
+    try {
+
+        const { chatId, userId } = req.body;
+
+        
+        const chat = await ChatModel.findById( chatId ) ;
+        const userThatWillRemove = await UserModel.findById( userId , "name" );
+
+        if(!chat ) return res.status(404).json("Chat was not found");
+
+        if(!chat.groupChat ) return res.json("This is not a group chat");
+
+        if( chat.creator.toString()!== req.userData._id.toString() ) return res.json("You are not allowed to remove members");
+
+        if( chat.members.length <= 3 ) return res.status(400).json("Group must have at least 3 members");
+
+        chat.members = chat.members.filter(
+            member => member.toString() !== userId.toString()
+        )
+
+        await chat.save();
+
+        emitEvent(
+            req,
+            ALERT,
+            chat.members,
+            ` ${userThatWillRemove.name} has been removed from the group`
+        )
+
+        emitEvent(  
+            req,
+            REFETCH_CHATS,
+            chat.members
+        )
+
+        return res
+       .status(200)
+       .json(
+        {
+            message: "Member removed successfully"
+        })
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const leaveGroup = async (req, res) => {
+    try {
+
+        const chatId = req.params.id;
+
+        const chat = await ChatModel.findById( chatId );
+
+        if(!chat ) return res.status(404).json("Chat was not found");
+
+        if(!chat.groupChat ) return res.status(400).json("This is not a group chat");
+        
+
+        const remainingMembers = chat.members = chat.members.filter(
+            member => member.toString() !== req.userData._id.toString()
+        );
+
+        if( chat.creator.toString() === req.userData._id ){
+            const randomElement = Math.floor(Math.random() * remainingMembers.length );
+            const newCreator = remainingMembers[randomElement];
+
+            chat.creator = newCreator;
+        }
+
+        chat.members = remainingMembers;
+
+        await chat.save()
+
+        emitEvent(
+            req,
+            ALERT,
+            chat.members,
+            `${req.userData.name} has left the group`
+        )
+
+        emitEvent(  
+            req,
+            REFETCH_CHATS,
+            chat.members
+        )
+
+        return res
+       .status(200)
+       .json(
+        {
+            message: `${req.userData.name} has left the group`
+        })
+        
+    } catch (error) {
+        console.log(error.message)
     }
 }
