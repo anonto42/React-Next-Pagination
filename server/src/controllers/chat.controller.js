@@ -1,7 +1,7 @@
 import { ALERT, NEW_ATTACHMENT, NEW_MESSAGE_ALERT, REFETCH_CHATS } from "../constants/events.js";
 import { ChatModel } from "../models/chat.model.js";
 import { UserModel } from "../models/user.model.js";
-import { deleteFilesFromCloudinary } from "../seeders/function.js";
+import { deleteFilesFromCloudinary } from "../utils/features.js";
 import { emitEvent } from "../utils/features.js";
 import { otherMembers } from './../lib/helper.js';
 import { MessageModel } from './../models/message.model.js';
@@ -427,6 +427,54 @@ export const deleteGroup = async (req, res) => {
             }
         )
 
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const getMessages = async (req, res) => {
+    try {
+
+        const chatId = req.params.id;
+        const { page = 1 } = req.query;
+
+        const limit = 20;
+        const skip = ( page - 1 ) * limit;
+
+        const messages = await MessageModel.find(
+            {
+                chat : chatId
+            }
+        )
+        .sort(
+            { 
+                createdAt : -1
+            }
+        )
+        .skip(
+            skip
+        )
+        .limit(
+            limit
+        )
+        .populate(
+            "sender",
+            "name"
+        )
+        .lean();
+
+        const totalMessages = await MessageModel.countDocuments({ chat : chatId })
+
+        const totalPages = Math.ceil( totalMessages / limit );
+
+        return res
+        .status(200)
+        .json(
+            {
+                messages: messages.reverse(),
+                totalMessages
+            }
+        )
     } catch (error) {
         console.log(error.message)
     }
