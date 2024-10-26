@@ -1,8 +1,9 @@
-import { ALERT, REFETCH_CHATS } from "../constants/events.js";
+import { ALERT, NEW_ATTACHMENT, NEW_MESSAGE_ALERT, REFETCH_CHATS } from "../constants/events.js";
 import { ChatModel } from "../models/chat.model.js";
 import { UserModel } from "../models/user.model.js";
 import { emitEvent } from "../utils/features.js";
 import { otherMembers } from './../lib/helper.js';
+import { MessageModel } from './../models/message.model.js';
 
 
 export const newGroup = async ( req , res , next) => {
@@ -273,37 +274,46 @@ export const sendAttachment = async (req, res) => {
     try {
 
         const { chatId } = req.body;
-        const files = req.files || [];
-
+        // const files = req.files;
+        
         const chat = await ChatModel.findById( chatId );
         const user = await UserModel.findById( req.userData._id , "name");
-
+        
+        
         if(!chat ) return res.status(404).json("Chat was not found");
-        if( files.length < 1 ) return res.status(404).json("Files were not found");
+
+        // if( files.length < 1 ) return res.status(404).json("Files were not found");
 
         const attachments = [];
-        const messageForRealTime = {
-            content: "" ,
-            attachments , 
-            sender : {
-                _id: user._id,
-                name: user.name
-            } , 
-            chatId
-        }
-        const messageForDB = { content: "" , attachments , sender : user._id , chatId }
+        
+        const messageForDB = { content: "" , attachments , sender : user._id , chat: chatId }
 
-        emitEvent()
+        const messageForRealTime = {
+                    ...messageForDB, 
+                    sender : {
+                        _id: user._id,
+                        name: user.name
+                    }
+                }
+
+        const message = await MessageModel.create( messageForDB )
+
+        emitEvent(req , NEW_ATTACHMENT , chat.members , {
+            message: messageForRealTime,
+            chatId
+        })
+
+        emitEvent(req , NEW_MESSAGE_ALERT , chat.members , { chatId });
 
         return res
         .status(200)
         .json(
             {
-                message: "Attachments sent successfully"
+                message
             }
         )
         
     } catch (error) {
-        console.log(error.message)
+        console.log(error)
     }
 }

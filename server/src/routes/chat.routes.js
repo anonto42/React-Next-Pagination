@@ -21,5 +21,6 @@ chatRouter.route("/leave/:id").post( leaveGroup )
 
 chatRouter.route("/message").post( attachmentsMulter , sendAttachment )
 
+chatRouter
 
 export default chatRouter;
