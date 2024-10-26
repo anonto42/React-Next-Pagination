@@ -32,3 +32,11 @@ export const emitEvent = (req,event,users,data) => {
         console.log(error.message)
     }
 }
+
+export const deleteFilesFromCloudinary = async (public_ids) => {
+    try {
+        
+    } catch (error) {
+        console.log(error.message)
+    }
+}
