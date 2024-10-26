@@ -268,3 +268,42 @@ export const leaveGroup = async (req, res) => {
         console.log(error.message)
     }
 }
+
+export const sendAttachment = async (req, res) => {
+    try {
+
+        const { chatId } = req.body;
+        const files = req.files || [];
+
+        const chat = await ChatModel.findById( chatId );
+        const user = await UserModel.findById( req.userData._id , "name");
+
+        if(!chat ) return res.status(404).json("Chat was not found");
+        if( files.length < 1 ) return res.status(404).json("Files were not found");
+
+        const attachments = [];
+        const messageForRealTime = {
+            content: "" ,
+            attachments , 
+            sender : {
+                _id: user._id,
+                name: user.name
+            } , 
+            chatId
+        }
+        const messageForDB = { content: "" , attachments , sender : user._id , chatId }
+
+        emitEvent()
+
+        return res
+        .status(200)
+        .json(
+            {
+                message: "Attachments sent successfully"
+            }
+        )
+        
+    } catch (error) {
+        console.log(error.message)
+    }
+}
