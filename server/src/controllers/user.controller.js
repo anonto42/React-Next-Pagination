@@ -51,10 +51,10 @@ export const newUser = async ( req , res ) => {
         const { name , userName , password } = req.body;
         
         if( !name || !userName || !password ) return res.status(404).json({message:"All fields must be provided"})
-            
+
         const avatar = {
             public_id: "test_public_id",
-            url: "test_url"
+            url: "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
         };
 
 
