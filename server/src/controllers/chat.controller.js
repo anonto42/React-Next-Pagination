@@ -11,7 +11,9 @@ export const newGroup = async ( req , res , next) => {
     try {
         const { name , member } = req.body;
 
-        if( member.length < 2 ) return next( new Error(`Group chat must have at least 2 members`,400));
+        if(!name) return res.status(404).json("Please enter a name")
+
+        if( member.length < 2 ) return res.status(404).json(`Group chat must have at least 2 members`,400);
 
         const allMembers = [...member, req.userData._id];
 
