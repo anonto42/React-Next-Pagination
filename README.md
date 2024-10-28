@@ -1,3 +1,3 @@
-# Real-Time-Chat
+# Stra-Chat
 
-* Strela
+* Stra
