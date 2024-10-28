@@ -472,7 +472,8 @@ export const getMessages = async (req, res) => {
         .json(
             {
                 messages: messages.reverse(),
-                totalMessages
+                totalMessages,
+                totalPages
             }
         )
     } catch (error) {
