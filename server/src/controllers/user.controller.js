@@ -49,11 +49,14 @@ export const newUser = async ( req , res ) => {
     try {
 
         const { name , userName , password } = req.body;
-
+        
+        if( !name || !userName || !password ) return res.status(404).json({message:"All fields must be provided"})
+            
         const avatar = {
             public_id: "test_public_id",
             url: "test_url"
         };
+
 
         const userDataForCreate = {
             name,
