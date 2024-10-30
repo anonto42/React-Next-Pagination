@@ -364,6 +364,8 @@ export const renameGroup = async (req, res) => {
         const chatId = req.params.id;
         const { name } = req.body;
 
+        if( !name ) return res.status(404).json("Name not found");
+
         const chat = await ChatModel.findById( chatId );
 
         if(!chat ) return res.status(404).json("Chat was not found");
