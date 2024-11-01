@@ -1,3 +1,4 @@
+import { ChatModel } from "../models/chat.model.js";
 import { UserModel } from "../models/user.model.js";
 import { sendRespons } from "../utils/features.js";
 
@@ -100,12 +101,20 @@ export const serchUser = async ( req , res ) => {
 
         const { name } = req.query;
 
+        if ( !name ) return res.status(404).json( "Plese enter name" )
+
+        const myChats = await ChatModel.find(
+            {
+                groupChat: false,
+                members: req.userData._id
+            }
+        )
 
 
         return res
         .status(200)
         .json(
-            name
+            myChats
         )
 
     } catch (error) {
