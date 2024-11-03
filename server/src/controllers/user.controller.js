@@ -99,22 +99,43 @@ export const getUserProfile = async (req, res) => {
 export const serchUser = async ( req , res ) => {
     try {
 
-        const { name } = req.query;
+        const { name="" } = req.query;
 
         if ( !name ) return res.status(404).json( "Plese enter name" )
 
         const myChats = await ChatModel.find(
             {
-                groupChat: false,
-                members: req.userData._id
+                members: req.userData._id,
+                groupChat: false
             }
         )
 
+        const allUsersFromMyChats = myChats.flatMap( chats => chats.members )
+
+        const allUsersExceptMyChats = await UserModel.find(
+            {
+                _id: {
+                    $nin: allUsersFromMyChats
+                },
+                name:{
+                    $regex: name,
+                    $options: "i"
+                }
+            }
+        )
+
+        const users = allUsersExceptMyChats.map(({_id,name,avatar})=>(
+            {
+                _id,
+                name,
+                avatar: avatar.url
+            }
+        ))
 
         return res
         .status(200)
         .json(
-            myChats
+            allUsersFromMyChats
         )
 
     } catch (error) {

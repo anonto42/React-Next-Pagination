@@ -13,6 +13,8 @@ route.route("/userCreate").post( singleAvatarUpload , newUser )
 
 route.route("/user").post( isAuthenticated , getUserProfile )
 
-route.route("/serchUser").post( serchUser )
+route.route("/serchUser").post( isAuthenticated , serchUser )
+
+route.route("/sendRequest").post( )
 
 export { route }
