@@ -1,5 +1,5 @@
 import express from "express";
-import { getUserProfile, login, logout, newUser, serchUser } from "../controllers/user.controller.js";
+import { getUserProfile, login, logout, newUser, sendFriendRequest, serchUser } from "../controllers/user.controller.js";
 import { singleAvatarUpload } from "../middlewares/multer.js";
 import isAuthenticated from "../middlewares/auth.js";
 
@@ -15,6 +15,6 @@ route.route("/user").post( isAuthenticated , getUserProfile )
 
 route.route("/serchUser").post( isAuthenticated , serchUser )
 
-route.route("/sendRequest").post( )
+route.route("/sendRequest").post( isAuthenticated , sendFriendRequest )
 
 export { route }

@@ -1,6 +1,8 @@
 import { ChatModel } from "../models/chat.model.js";
+import { RequestModel } from "../models/request.model.js";
 import { UserModel } from "../models/user.model.js";
-import { sendRespons } from "../utils/features.js";
+import { emitEvent, sendRespons } from "../utils/features.js";
+import { NEW_REQUEST } from './../constants/events.js';
 
 export const login = async ( req , res ) => {
     try {
@@ -138,6 +140,52 @@ export const serchUser = async ( req , res ) => {
             allUsersFromMyChats
         )
 
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const sendFriendRequest = async (req, res) =>{
+    try {
+
+        const { userId } = req.body;
+
+        if ( !userId ) return res.status(404).json({message:"Please enter a user"})
+
+        const request = await RequestModel.findOne(
+            {
+                $or: [
+                    { 
+                        sender: req.userData._id,
+                        receiver: userId
+                    },
+                    {
+                        sender: userId,
+                        receiver: req.userData._id
+                    }
+                ]
+            }
+        )
+
+        if(request) return res.status(404).json({message:"You already sent a friend request"})
+
+        await RequestModel.create(
+            {
+                sender: req.userData._id,
+                receiver: userId
+            }
+        )
+
+        emitEvent( req , NEW_REQUEST , [userId] )
+
+        return res
+        .status(200)
+        .json(
+            {
+                message: "Friend request sent successfully"
+            }
+        )
+        
     } catch (error) {
         console.log(error.message)
     }
