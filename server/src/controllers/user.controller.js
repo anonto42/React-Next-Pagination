@@ -2,7 +2,7 @@ import { ChatModel } from "../models/chat.model.js";
 import { RequestModel } from "../models/request.model.js";
 import { UserModel } from "../models/user.model.js";
 import { emitEvent, sendRespons } from "../utils/features.js";
-import { NEW_REQUEST } from './../constants/events.js';
+import { NEW_REQUEST, REFETCH_CHATS } from './../constants/events.js';
 
 export const login = async ( req , res ) => {
     try {
@@ -183,6 +183,63 @@ export const sendFriendRequest = async (req, res) =>{
         .json(
             {
                 message: "Friend request sent successfully"
+            }
+        )
+        
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const acceptRequest = async (req, res) => {
+    try {
+
+        const { requestId , accept } = req.body;
+
+        if ( !requestId || !accept ) return res.status(404).json({ message:"All fields must be provided" })
+
+        const request = await RequestModel.findById( requestId )
+        .populate("sender" , "name")
+        .populate("receiver" , "name")
+
+        if (!request ) return res.status(404).json({ message:"Request not found" })
+
+        if ( request.receiver !== req.userData._id ) return res.status(400).json({ message:"You are not authorize to accept this request" })
+
+        if ( !accept ) {
+            await request.deleteOne()
+
+            return res
+                .status(200)
+                .json(
+                        {
+                            message: "Friend request rejected successfully"
+                        }
+                    )
+        }
+
+        const members = [ request.sender._id , request.receiver._id ]
+
+        await Promise.all(
+            [
+                ChatModel.create(
+                    {
+                        members,
+                        name:`${request.sender.name}-${request.receiver.name}`
+                    }
+                ),
+                request.deleteOne()
+            ]
+        )
+
+        emitEvent( req, REFETCH_CHATS , members )
+
+        return res
+        .status(200)
+        .json(
+            {
+                message: "Friend request accepted successfully",
+                sender_ID: request.sender._id
             }
         )
         
