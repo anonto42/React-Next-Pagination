@@ -10,6 +10,8 @@ const isAuthenticated = async (req, res , next) => {
 
         const decodedToken = jwt.verify( stra_cookie , process.env.JWT_SECRET_KEY );
 
+        if ( !decodedToken ) return res.status(404).json("Token not found")
+
         const user = await UserModel.findById( decodedToken._id ).select( " -password");
 
         req.userData = user;
