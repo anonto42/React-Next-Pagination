@@ -137,7 +137,7 @@ export const serchUser = async ( req , res ) => {
         return res
         .status(200)
         .json(
-            allUsersFromMyChats
+            users
         )
 
     } catch (error) {
