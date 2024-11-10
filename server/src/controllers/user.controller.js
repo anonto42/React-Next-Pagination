@@ -247,3 +247,42 @@ export const acceptRequest = async (req, res) => {
         console.log(error.message)
     }
 }
+
+export const getAllNotifications = async (req, res) => {
+    try {
+
+        const requests = await RequestModel.find(
+            {
+                receiver: req.userData._id
+            }
+        )
+        .populate(
+            "sender",
+            "name avatar"
+        )
+
+        if ( !requests ) return res.status(404).json("Not Found")
+
+        const allRequests = requests.map( ( { _id , sender } ) => (
+            {
+                _id,
+                sender: {
+                    _id: sender._id,
+                    name: sender.name,
+                    avatar: sender.avatar.url
+                }
+            }
+        ) )
+
+        return res
+       .status(200)
+       .json(
+        {
+            allRequests
+        }
+       )
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
