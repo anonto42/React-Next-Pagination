@@ -3,6 +3,7 @@ import { RequestModel } from "../models/request.model.js";
 import { UserModel } from "../models/user.model.js";
 import { emitEvent, sendRespons } from "../utils/features.js";
 import { NEW_REQUEST, REFETCH_CHATS } from './../constants/events.js';
+import { otherMembers } from './../lib/helper.js';
 
 export const login = async ( req , res ) => {
     try {
@@ -284,5 +285,56 @@ export const getAllNotifications = async (req, res) => {
         
     } catch (error) {
         console.log(error)
+    }
+}
+
+export const getFriends = async (req, res) => {
+    try {
+
+        const chatId = req.query.chatId;
+
+        // if (!chatId ) return res.status(404).json("Chat ID not provided")
+
+        const chats = await ChatModel.find(
+            {
+                members: req.userData._id,
+                groupChat: false,
+            }
+        )
+        .populate("members", "name avatar")
+
+        if (!chats ) return res.status(404).json("Not Found")
+
+        const friends = chats.map( ( { members } ) => {
+            const otherUser = otherMembers(members , req.userData._id)
+            return {
+                _id: otherUser._id,
+                name: otherUser.name,
+                avatar: otherUser.avatar.url
+            }
+        } )
+
+
+        if (chatId) {
+
+            const chat = await ChatModel.findById(chatId);
+
+            const availableFrieds = friends.filter(
+                ( friends ) => !chat.members.includes( friends._id )
+            )
+            
+        } else {
+
+            return res
+            .status(200)
+            .json(
+                {
+                    friends
+                }
+            )   
+        }
+
+    } catch (error) {
+        console.log(error.message)
     }
 }
