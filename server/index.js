@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDB from './src/db/db.js';
 import cookieParser from 'cookie-parser';
 import chatRouter from './src/routes/chat.routes.js';
+import AdminRoutes from './src/routes/admin.routes.js';
 
 const app = express();
 const port = process.env.PORT || 3500;
@@ -17,6 +18,7 @@ app.use(cookieParser());
 // Routes
 app.use("/api",route)
 app.use("/api/chat",chatRouter)
+app.use("/admin",AdminRoutes)
 
 app.listen( port , ()=> {
     connectDB();
