@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { allUsers } from "../controllers/admin.controller.js"
+import { allChats, allUsers, messages } from "../controllers/admin.controller.js"
 
 const router = Router()
 
@@ -11,9 +11,9 @@ router.route("/logout").post()
 
 router.route("/users").post(allUsers)
 
-router.route("/chats").post()
+router.route("/chats").post(allChats)
 
-router.route("/messages").post()
+router.route("/messages").post(messages)
 
 router.route("/stats").post()
 
