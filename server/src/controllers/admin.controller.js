@@ -1,5 +1,6 @@
 import { UserModel } from "../models/user.model.js"
 import { ChatModel } from '../models/chat.model.js';
+import { MessageModel } from '../models/message.model.js';
 
 
 export const allUsers = async (req, res, next) => {
@@ -57,11 +58,36 @@ export const allChats = async ( req , res ) =>  {
         .populate( "members" , "name avatar")
         .populate("creator", "name avatar")
 
+        const transfromChats = await Promise.all(
+
+            chats.map( async ( { members , _id , groupChat , name , creator} )=> {
+
+                const totaMessages = await MessageModel.countDocuments({chat:_id})
+                return {
+                    _id , 
+                    groupChat,
+                    name,
+                    avatar : members.slice(0,3).map( m => m.avatar.url ),
+                    members : members.map(({ _id , name , avatar })=> ({
+                        _id,
+                        name,
+                        avatar: avatar.url
+                    })),
+                    creator : {
+                        name : creator?.name || "None",
+                        avatar : creator?.avatar?.url || ""
+                    },
+                    totalMembers : members.length,
+                    totalMessages: totaMessages
+                }
+            })
+        )
+
         return res
         .status(200)
         .json(
             {
-                chats : chats
+                chats : transfromChats
             }
         )
         
