@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { allChats, allUsers, messages } from "../controllers/admin.controller.js"
+import { allChats, allUsers, getDeshbordStatus, messages } from "../controllers/admin.controller.js"
 
 const router = Router()
 
@@ -15,6 +15,6 @@ router.route("/chats").post(allChats)
 
 router.route("/messages").post(messages)
 
-router.route("/stats").post()
+router.route("/stats").post(getDeshbordStatus)
 
 export default router;
