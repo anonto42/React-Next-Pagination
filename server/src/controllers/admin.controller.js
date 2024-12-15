@@ -99,11 +99,48 @@ export const allChats = async ( req , res ) =>  {
 export const messages = async ( req , res ) => {
     try {
 
+        const messages = await MessageModel.find({})
+        .populate("sender", "name avatar")
+        .populate("chat" , "groupChat")
+
+        const transformedMessages = messages.map(({ content , attachments , _id , sender , createdAt , chat })=>({
+            _id,
+            attachments,
+            content,
+            createdAt,
+            chat: chat._id,
+            groupChat: chat.groupChat,
+            sender: {
+                _id: sender._id,
+                name: sender.name,
+                avatar: sender.avatar.url
+            }
+        }))
+
         return res
         .status(200)
         .json(
             {
-                message: "Messages fetched successfully"
+                message: "Messages fetched successfully",
+                data: transformedMessages
+            }
+        )
+        
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const getDeshbordStatus = async ( req , res ) => {
+    try {
+
+       
+
+        return res
+        .status(200)
+        .json(
+            {
+                message: " fetched successfully"
             }
         )
         
