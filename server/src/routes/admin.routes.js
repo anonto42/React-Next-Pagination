@@ -1,11 +1,11 @@
 import { Router } from "express"
-import { allChats, allUsers, getDeshbordStatus, messages } from "../controllers/admin.controller.js"
+import { adminLogin, allChats, allUsers, getDeshbordStatus, messages } from "../controllers/admin.controller.js"
 
 const router = Router()
 
 router.route("/").post()
 
-router.route("/verify").post()
+router.route("/verify").post( adminLogin )
 
 router.route("/logout").post()
 
