@@ -1,6 +1,37 @@
 import { UserModel } from "../models/user.model.js"
 import { ChatModel } from '../models/chat.model.js';
 import { MessageModel } from '../models/message.model.js';
+import jwt from 'jsonwebtoken';
+import { option } from "../utils/features.js";
+
+
+export const adminLogin = ( req , res ) => {
+    try {
+        
+        const { secretKey } = req.body; 
+
+        if ( !secretKey ) return res.status(404).json({message: "Please enter a secret key"});
+
+        const adminSecretKey = process.env.ADMIN_SECRET_KEY || "asdfghjkl"
+
+        const isMatch = secretKey === adminSecretKey;
+
+        if (!isMatch) return res.status(404).json({message: "Invalid secret key"});
+
+        const token = jwt.sign(secretKey , process.env.JWT_SECRET_KEY)
+
+        return res
+        .status(200)
+        .cookie("message_admin_token" , token , { ...option, maxAge: 1000*60*15 })
+        .json({
+            success: true,
+            message: "Succesfull login"
+        })
+
+    } catch (error) {
+        console.log(error.message)
+    }
+}
 
 
 export const allUsers = async (req, res, next) => {
