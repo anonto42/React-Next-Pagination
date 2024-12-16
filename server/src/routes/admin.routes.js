@@ -3,11 +3,33 @@ import { adminLogin, adminLogOut, allChats, allUsers, getDeshbordStatus, message
 
 const router = Router()
 
-router.route("/").post()
+const adminOnly = ( req, res , next ) => {
+    try {
+
+        const token = req.cookies("message_admin_token");
+
+        if( !token ) return res.status(401).json({message: "Only admin users are allowed to access"})
+        
+        const adminID = jwt.verify(token , process.env.JWT_SECRET_KEY);
+        const adminSecretKey = process.env.ADMIN_SECRET_KEY;
+
+        const isMached = adminID === adminSecretKey
+
+        if (!isMached ) return res.status(401).json({message: "Invalid admin token"})
+            
+        next()
+        
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
 
 router.route("/verify").post( adminLogin )
 
 router.route("/logout").post( adminLogOut )
+
+router.route("/").post()
 
 router.route("/users").post(allUsers)
 
