@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { adminLogin, allChats, allUsers, getDeshbordStatus, messages } from "../controllers/admin.controller.js"
+import { adminLogin, adminLogOut, allChats, allUsers, getDeshbordStatus, messages } from "../controllers/admin.controller.js"
 
 const router = Router()
 
@@ -7,7 +7,7 @@ router.route("/").post()
 
 router.route("/verify").post( adminLogin )
 
-router.route("/logout").post()
+router.route("/logout").post( adminLogOut )
 
 router.route("/users").post(allUsers)
 
