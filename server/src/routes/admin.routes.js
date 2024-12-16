@@ -29,6 +29,8 @@ router.route("/verify").post( adminLogin )
 
 router.route("/logout").post( adminLogOut )
 
+router.use(adminOnly())
+
 router.route("/").post()
 
 router.route("/users").post(allUsers)
