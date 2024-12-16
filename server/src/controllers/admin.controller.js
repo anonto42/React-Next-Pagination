@@ -10,13 +10,13 @@ export const adminLogin = ( req , res ) => {
         
         const { secretKey } = req.body; 
 
-        if ( !secretKey ) return res.status(404).json({message: "Please enter a secret key"});
+        if ( !secretKey ) return res.status(404).json({message: "Please enter a secretkey"});
 
         const adminSecretKey = process.env.ADMIN_SECRET_KEY || "asdfghjkl"
 
         const isMatch = secretKey === adminSecretKey;
 
-        if (!isMatch) return res.status(404).json({message: "Invalid secret key"});
+        if (!isMatch) return res.status(404).json({message: "Invalid secretkey"});
 
         const token = jwt.sign(secretKey , process.env.JWT_SECRET_KEY)
 
