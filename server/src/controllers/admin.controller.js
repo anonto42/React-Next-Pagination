@@ -33,6 +33,17 @@ export const adminLogin = ( req , res ) => {
     }
 }
 
+export const adminLogOut = (req, res) => {
+    return res
+    .status(200)
+    .cookie("message_admin_token", "" , { ...option , maxAge: 0 } )
+    .json(
+        {
+            success: true,
+            message: "Logout successfull"
+        }
+    )
+}
 
 export const allUsers = async (req, res, next) => {
     try {
