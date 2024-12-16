@@ -134,13 +134,46 @@ export const messages = async ( req , res ) => {
 export const getDeshbordStatus = async ( req , res ) => {
     try {
 
-       
+       const [ groutpCount , userCount , messagesCount , totalCount ] = await Promise.all([
+        ChatModel.countDocuments({groupChat:true}),
+        UserModel.countDocuments(),
+        MessageModel.countDocuments(),
+        ChatModel.countDocuments()
+       ])
+
+       const today = new Date();
+
+       const last7Days = new Date();
+       last7Days.setDate(last7Days.getDate() - 7);
+
+       const last7DaysMessages = await MessageModel.find({
+        createdAt:{
+            $gte: last7Days,
+            $lte: today
+        }
+       })
+       const day_In_Miliseconds = 1000 * 60 * 60 * 24;
+
+       const messages = new Array(7).fill(0);
+
+       last7DaysMessages.forEach( message => {
+
+            const indexApprox = (today.getTime() - message.getTime() ) / day_In_Miliseconds }
+    
+        );
+
+       const status = {
+        groutpCount,
+        userCount,
+        messagesCount,
+        totalCount
+       }
 
         return res
         .status(200)
         .json(
             {
-                message: " fetched successfully"
+                status : status
             }
         )
         
