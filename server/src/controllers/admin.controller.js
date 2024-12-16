@@ -158,9 +158,14 @@ export const getDeshbordStatus = async ( req , res ) => {
 
        last7DaysMessages.forEach( message => {
 
-            const indexApprox = (today.getTime() - message.getTime() ) / day_In_Miliseconds }
-    
-        );
+            const indexApprox = 
+            ( today.getTime() - message.getTime() ) / day_In_Miliseconds; 
+
+            const index = Math.floor(indexApprox)
+
+            messages[ 6 - index ] ++ 
+        
+        });
 
        const status = {
         groutpCount,
