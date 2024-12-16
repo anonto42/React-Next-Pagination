@@ -228,3 +228,17 @@ export const getDeshbordStatus = async ( req , res ) => {
         console.log(error.message)
     }
 }
+
+export const getAdminData = (req, res) => {
+    try {
+        return res
+        .status(200)
+        .json(
+            {
+                message: "Admin data fetched successfully"
+            }
+        )
+    } catch (error) {
+        console.log(error)
+    }
+}
