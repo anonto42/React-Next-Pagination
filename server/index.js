@@ -8,6 +8,8 @@ import AdminRoutes from './src/routes/admin.routes.js';
 import { Server } from 'socket.io';
 
 const app = express();
+const io = new Server(app,{});
+
 const port = process.env.PORT || 3500;
 
 
