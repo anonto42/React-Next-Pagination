@@ -5,6 +5,7 @@ import connectDB from './src/db/db.js';
 import cookieParser from 'cookie-parser';
 import chatRouter from './src/routes/chat.routes.js';
 import AdminRoutes from './src/routes/admin.routes.js';
+import { Server } from 'socket.io';
 
 const app = express();
 const port = process.env.PORT || 3500;
