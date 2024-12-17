@@ -1,16 +1,18 @@
 import { Router } from "express"
 import { adminLogin, adminLogOut, allChats, allUsers, getAdminData, getDeshbordStatus, messages } from "../controllers/admin.controller.js"
+import jwt from 'jsonwebtoken';
 
 const router = Router()
 
-const adminOnly = ( req, res , next ) => {
+const adminOnly = ( req , res , next ) => {
     try {
 
-        const token = req.cookies("message_admin_token");
+        const token = req.cookies.message_admin_token;
 
         if( !token ) return res.status(401).json({message: "Only admin users are allowed to access"})
         
         const adminID = jwt.verify(token , process.env.JWT_SECRET_KEY);
+
         const adminSecretKey = process.env.ADMIN_SECRET_KEY;
 
         const isMached = adminID === adminSecretKey
@@ -29,7 +31,7 @@ router.route("/verify").post( adminLogin )
 
 router.route("/logout").post( adminLogOut )
 
-router.use(adminOnly())
+router.use(adminOnly)
 
 router.route("/").get(getAdminData)
 
