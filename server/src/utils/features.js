@@ -1,5 +1,6 @@
 
 import jwt from "jsonwebtoken";
+import { userSocketIDs } from "../../index.js";
 
 
 export const option = {
@@ -35,6 +36,16 @@ export const emitEvent = (req,event,users,data) => {
 
 export const deleteFilesFromCloudinary = async (public_ids) => {
     try {
+        
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+export const getSockets = async (users=[]) => {
+    try {
+        
+        return users.map(user => userSocketIDs.get( user._id.toString()));
         
     } catch (error) {
         console.log(error.message)
