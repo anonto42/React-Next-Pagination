@@ -7,6 +7,7 @@ import axios from 'axios';
 import { server } from './libs/config';
 import { useDispatch, useSelector } from 'react-redux';
 import { userNotExist } from './redux/reducer/auth.js';
+import { Toaster } from "react-hot-toast"
 
 const Home = lazy(() => import('./pages/Home'));
 const Auth = lazy(() => import('./pages/Auth'));
@@ -56,6 +57,7 @@ const App = () => {
             
         </Routes>
       </Suspense>
+      <Toaster position='bottom-center' />
     </BrowserRouter>
   )
 }
