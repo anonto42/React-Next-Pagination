@@ -4,6 +4,11 @@ import { CameraAlt as CamaraAltIcon } from '@mui/icons-material'
 import { VisuallyHidden } from '../Components/styles/StyledCompo'
 import { useFileHandler, useInputValidation , useStrongPassword} from "6pp";
 import { userNameValidator } from '../utils/usernameValidator';
+import axios from 'axios';
+import { server } from '../libs/config';
+import { useDispatch } from 'react-redux';
+import { userExists } from '../redux/reducer/auth';
+import toast from 'react-hot-toast';
 
 const Auth = () => {
 
@@ -14,10 +19,35 @@ const Auth = () => {
   const password = useStrongPassword("");
   const avatar = useFileHandler("single");
   const toogleLogin = () => setIsLogin(!isLogin);
+  const dispatch = useDispatch()
 
   const handerSignup = () =>{}
 
-  const handerlogin = () =>{}
+  const handerlogin = (e) =>{
+    e.preventDefault();
+
+    const config = {
+      withCredentials: true,
+      headers:{
+        "Content-Type":"application/json"
+      }
+    };
+
+    try {
+      const { data } = axios.post(`${server}/api/login`, {
+        userName: userName.value,
+        password: password.value
+      },
+      config
+    );
+
+    dispatch( userExists(true))
+    toast.success(data.message)
+
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Somthing went wrong")
+    }
+  }
 
 
   return <div style={{ backgroundImage: "linear-gradient(to right, gray , pink)"}}>
@@ -29,7 +59,7 @@ const Auth = () => {
               <Typography variant='h5'>Login</Typography>
               <form style={{ width: "100%" , marginTop:"1rem"}} onSubmit={handerlogin} >
 
-                 <TextField required fullWidth label="Email" type='email' margin='normal' variant='outlined' value={email.value} onChange={email.changeHandler} />
+                <TextField required fullWidth label="UserName" margin='normal' variant='outlined' value={userName.value} onChange={userName.changeHandler} />
                  <TextField required fullWidth type='password' label="Password" margin='normal' variant='outlined'  />
 
                  <Button sx={{marginTop:"1rem"}} fullWidth variant='contained' color='primary' type='submit' >Login</Button>
