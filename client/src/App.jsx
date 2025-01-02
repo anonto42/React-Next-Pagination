@@ -4,6 +4,9 @@ import ProtectRoute from './utils/ProtectRoute';
 import NotFound from './pages/NotFound';
 import Loaders from './Components/Layout/Loaders';
 import axios from 'axios';
+import { server } from './libs/config';
+import { useDispatch, useSelector } from 'react-redux';
+import { userNotExist } from './redux/reducer/auth.js';
 
 const Home = lazy(() => import('./pages/Home'));
 const Auth = lazy(() => import('./pages/Auth'));
@@ -17,15 +20,19 @@ const ChatManagemet = lazy(() => import("./pages/ChateManagement"))
 
 const App = () => {
 
-  const user = true
+  const dispatch = useDispatch()
+  const { user , loader } = useSelector((state)=>state.auth )
 
   useEffect(()=>{
 
-    axios.get("/")
+    axios
+    .get(`${server}/api/user`)
+    .then(res => console.log(res.data))
+    .catch(err => dispatch(userNotExist()))
 
-  },[])
+  },[dispatch])
 
-  return (
+  return loader? ( <Loaders />) : (
     <BrowserRouter>
       <Suspense fallback={<Loaders />}>
         <Routes>
