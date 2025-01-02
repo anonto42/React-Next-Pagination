@@ -28,7 +28,7 @@ app.use(cookieParser());
 // Routes
 app.use("/api",route)
 app.use("/api/chat",chatRouter)
-app.use("/admin",AdminRoutes)
+app.use("/api/admin",AdminRoutes)
 
 // Socket routes started
 
