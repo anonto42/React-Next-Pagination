@@ -11,6 +11,7 @@ import { NEW_MESSAGE, NEW_MESSAGE_ALERT } from './src/constants/events.js';
 import { randomUUID as uuid } from 'crypto';
 import { getSockets } from './src/utils/features.js';
 import { MessageModel } from './src/models/message.model.js';
+import cors from 'cors';
 
 const app = express();
 const server = createServer(app)
@@ -24,6 +25,10 @@ dotenv.config({path:"./.env"});
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
+app.use(cors({
+    origin:process.env.FRONTEND_URL,
+    credentials:true
+}))
 
 // Routes
 app.use("/api",route)
