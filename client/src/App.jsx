@@ -1,8 +1,9 @@
-import React,{lazy, Suspense} from 'react'
+import React,{lazy, Suspense, useEffect} from 'react'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectRoute from './utils/ProtectRoute';
 import NotFound from './pages/NotFound';
 import Loaders from './Components/Layout/Loaders';
+import axios from 'axios';
 
 const Home = lazy(() => import('./pages/Home'));
 const Auth = lazy(() => import('./pages/Auth'));
@@ -17,6 +18,12 @@ const ChatManagemet = lazy(() => import("./pages/ChateManagement"))
 const App = () => {
 
   const user = true
+
+  useEffect(()=>{
+
+    axios.get("/")
+
+  },[])
 
   return (
     <BrowserRouter>
