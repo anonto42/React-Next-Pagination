@@ -8,6 +8,7 @@ import { server } from './libs/config';
 import { useDispatch, useSelector } from 'react-redux';
 import { userExists, userNotExist } from './redux/reducer/auth.js';
 import { Toaster } from "react-hot-toast"
+import { setAvatar, setBio, setJoined, setName, setUserName } from './redux/reducer/user.js';
 
 const Home = lazy(() => import('./pages/Home'));
 const Auth = lazy(() => import('./pages/Auth'));
@@ -23,6 +24,7 @@ const App = () => {
 
   const dispatch = useDispatch()
   const { user , loader } = useSelector((state)=>state.auth )
+  const userSlice = useSelector((state)=>state.userSlice )
   const config = {
     withCredentials: true,
     headers:{
@@ -31,15 +33,31 @@ const App = () => {
   };
 
   const profile = async (params) => {
-      const response = await axios.post(`${server}/api/user`,{},config)
-      if(response.data.success === true) {
-        dispatch(userExists(true))
-        console.log(response.data.user)
+      try {
+        const response = await axios.post(`${server}/api/user`,{},config)
+        if(response.data.success === true) {
+          dispatch(userExists(true))
+          dispatch(setJoined(response.data.user.createdAt))
+          dispatch(
+            setAvatar(response.data.user.avatar)
+          )
+          dispatch(
+            setBio(response.data.user.bio)
+          )
+          dispatch(
+            setUserName(response.data.user.userName)
+          )  
+          dispatch(
+            setName(response.data.user.name)
+          )
+        }
+      } catch (error) {
+        dispatch(userNotExist())
       }
     }
   useEffect(()=>{
     profile()
-  },[])
+  },[dispatch])
 
   return loader? ( <Loaders />) : (
     <BrowserRouter>
