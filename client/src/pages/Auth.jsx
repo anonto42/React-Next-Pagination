@@ -15,34 +15,56 @@ const Auth = () => {
   const [isLogin,setIsLogin] = useState(true);
   const name = useInputValidation("");
   const userName = useInputValidation("",userNameValidator);
-  const email = useInputValidation("");
   const password = useStrongPassword("");
   const avatar = useFileHandler("single");
   const toogleLogin = () => setIsLogin(!isLogin);
   const dispatch = useDispatch()
 
-  const handerSignup = () =>{}
+  const config = {
+        withCredentials: true,
+        headers:{
+          "Content-Type":"application/json"
+        }
+      };
 
-  const handerlogin = (e) =>{
+  const handerSignup = async (e) =>{
     e.preventDefault();
-
-    const config = {
-      withCredentials: true,
-      headers:{
-        "Content-Type":"application/json"
-      }
-    };
-
     try {
-      const { data } = axios.post(`${server}/api/login`, {
+      const data = {
+        name: name.value,
+        userName: userName.value,
+        password: password.value,
+        avatar: avatar.file
+      }
+      const response = await axios.post(`${server}/api/userCreate`, data , config)
+
+      if(response.data.success == true) {
+        toast.success("User Created Successfully")
+        setTimeout(() => {
+          window.location.href = "/"
+        }, 3000);
+      }else{
+        toast.error(response.data.message)
+      }
+      
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Somthing went wrong")
+    }
+  }
+
+  const handerlogin = async(e) =>{
+    e.preventDefault();
+    try {
+      const data = await axios.post(`${server}/api/login`, {
         userName: userName.value,
         password: password.value
       },
       config
     );
-
-    dispatch( userExists(true))
-    toast.success(data.message)
+    console.log(data)
+    // toast.success(data)
+    setTimeout(() => {
+    }, 3000);
 
     } catch (error) {
       toast.error(error?.response?.data?.message || "Somthing went wrong")
@@ -57,12 +79,12 @@ const Auth = () => {
           isLogin? (
             <>
               <Typography variant='h5'>Login</Typography>
-              <form style={{ width: "100%" , marginTop:"1rem"}} onSubmit={handerlogin} >
+              <form style={{ width: "100%" , marginTop:"1rem"}} action='POST' >
 
                 <TextField required fullWidth label="UserName" margin='normal' variant='outlined' value={userName.value} onChange={userName.changeHandler} />
                  <TextField required fullWidth type='password' label="Password" margin='normal' variant='outlined'  />
 
-                 <Button sx={{marginTop:"1rem"}} fullWidth variant='contained' color='primary' type='submit' >Login</Button>
+                 <button onClick={handerlogin} style={{width:"100%",background:"#1565C0",outline:"none",border:"none",fontSize:"20px",color:"white",padding:"10px 0 10px 0",cursor:"pointer",borderRadius:"5px",marginTop:"10px"}}>Login</button>
 
                 <Typography textAlign={"center"} m={"1rem"} >Or</Typography>
 
@@ -73,7 +95,7 @@ const Auth = () => {
           ) : ( 
             <>
             <Typography variant='h5'>Sign Up</Typography>
-            <form style={{ width: "100%" , marginTop:"1rem"}} onSubmit={handerSignup} >
+            <form style={{ width: "100%" , marginTop:"1rem"}} action='POST' >
 
               <Stack position={"relative"} width={"10rem"} margin={"auto"}>
                 <Avatar sx={{width:"10rem",height:"10rem",objectFit:"contain"}} src={avatar.preview} />
@@ -90,13 +112,10 @@ const Auth = () => {
                 {
                   userName.error && <Typography sx={{fontSize:"14px"}} color='error'>{userName.error}</Typography> 
                 }
-                <TextField required fullWidth label="Email" type='email' margin='normal' variant='outlined' value={email.value} onChange={email.changeHandler} />
                 <TextField required fullWidth type='password' label="Password" margin='normal' variant='outlined' value={password.value} onChange={password.changeHandler} />
-                {
-                  password.error && <Typography sx={{fontSize:"14px"}} color='error'>{password.error}</Typography>
-                }
+                
 
-                <Button sx={{marginTop:"1rem"}} fullWidth variant='contained' color='primary' type='submit' >Sign up</Button>
+                <button onClick={handerSignup} style={{width:"100%",background:"#1565C0",outline:"none",border:"none",fontSize:"20px",color:"white",padding:"10px 0 10px 0",cursor:"pointer",borderRadius:"5px",marginTop:"10px"}}>Sign Up</button>
 
                 <Typography textAlign={"center"} m={"1rem"} >Or</Typography>
 
