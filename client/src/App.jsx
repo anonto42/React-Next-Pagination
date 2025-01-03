@@ -6,7 +6,7 @@ import Loaders from './Components/Layout/Loaders';
 import axios from 'axios';
 import { server } from './libs/config';
 import { useDispatch, useSelector } from 'react-redux';
-import { userNotExist } from './redux/reducer/auth.js';
+import { userExists, userNotExist } from './redux/reducer/auth.js';
 import { Toaster } from "react-hot-toast"
 
 const Home = lazy(() => import('./pages/Home'));
@@ -23,15 +23,23 @@ const App = () => {
 
   const dispatch = useDispatch()
   const { user , loader } = useSelector((state)=>state.auth )
+  const config = {
+    withCredentials: true,
+    headers:{
+      "Content-Type":"application/json"
+    }
+  };
 
+  const profile = async (params) => {
+      const response = await axios.post(`${server}/api/user`,{},config)
+      if(response.data.success === true) {
+        dispatch(userExists(true))
+        console.log(response.data.user)
+      }
+    }
   useEffect(()=>{
-
-    axios
-    .get(`${server}/api/user`)
-    .then(res => console.log(res.data))
-    .catch(err => dispatch(userNotExist()))
-
-  },[dispatch])
+    profile()
+  },[])
 
   return loader? ( <Loaders />) : (
     <BrowserRouter>
