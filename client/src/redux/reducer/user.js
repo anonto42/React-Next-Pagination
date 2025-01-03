@@ -13,15 +13,23 @@ const userSlice = createSlice({
     name: "userSlice",
     initialState,
     reducers: {
-        setUserAcount: ( state , action ) =>{
+        setName: ( state , action ) =>{
             state.name = action.payload;
+        },
+        setUserName: ( state , action ) =>{
             state.userName = action.payload;
+        },
+        setBio: ( state , action ) =>{
             state.bio = action.payload;
-            state.avatar = action.payload;
+        },
+        setAvatar: ( state , action ) =>{
+            state.avatar = action.payload;;
+        },
+        setJoined: ( state , action ) =>{
             state.Joined = action.payload;
         }
     },
 })
 
 export default userSlice;
-export const { setUserAcount } = authSlice.actions;
+export const { setName, setUserName , setBio , setAvatar,setJoined} = userSlice.actions;
