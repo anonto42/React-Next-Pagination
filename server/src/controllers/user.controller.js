@@ -92,7 +92,12 @@ export const getUserProfile = async (req, res) => {
 
         return res
         .status(200)
-        .json(user);
+        .json(
+            {
+                user,
+                success: true
+            }
+        );
 
     } catch (error) {
         console.log(error.message)

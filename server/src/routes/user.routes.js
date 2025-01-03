@@ -11,7 +11,7 @@ route.route("/logout").post( logout )
 
 route.route("/userCreate").post( singleAvatarUpload , newUser )
 
-route.route("/user").get( isAuthenticated , getUserProfile )
+route.route("/user").post( isAuthenticated , getUserProfile )
 
 route.route("/serchUser").post( isAuthenticated , serchUser )
 
