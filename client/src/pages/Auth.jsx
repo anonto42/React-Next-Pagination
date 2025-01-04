@@ -61,10 +61,16 @@ const Auth = () => {
       },
       config
     );
-    console.log(data)
-    // toast.success(data)
-    setTimeout(() => {
-    }, 3000);
+    if(data.data.success === true) {
+      dispatch(userExists(true))
+      toast.success("Login Successfully")
+      setTimeout(() => {
+        window.location.href = "/"
+      },3000)
+    }
+    if (!data.data.success) {
+     toast.error("something went wrong") 
+    }
 
     } catch (error) {
       toast.error(error?.response?.data?.message || "Somthing went wrong")
@@ -82,7 +88,7 @@ const Auth = () => {
               <form style={{ width: "100%" , marginTop:"1rem"}} action='POST' >
 
                 <TextField required fullWidth label="UserName" margin='normal' variant='outlined' value={userName.value} onChange={userName.changeHandler} />
-                 <TextField required fullWidth type='password' label="Password" margin='normal' variant='outlined'  />
+                 <TextField required fullWidth value={password.value} onChange={password.changeHandler} type='password' label="Password" margin='normal' variant='outlined'  />
 
                  <button onClick={handerlogin} style={{width:"100%",background:"#1565C0",outline:"none",border:"none",fontSize:"20px",color:"white",padding:"10px 0 10px 0",cursor:"pointer",borderRadius:"5px",marginTop:"10px"}}>Login</button>
 
