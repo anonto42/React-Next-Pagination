@@ -1,6 +1,8 @@
 
 import jwt from "jsonwebtoken";
 import { userSocketIDs } from "../../index.js";
+import { v2 as cloudinary } from 'cloudinary';
+import { v4 as uuid } from "uuid";
 
 
 export const option = {
@@ -52,9 +54,25 @@ export const getSockets = async (users=[]) => {
     }
 }
 
-export const uploadFilesToCloudinary = async ( file = [] ) => {
+export const uploadFilesToCloudinary = async ( files = [] ) => {
     try {
-        
+        const uploadPromises = files.map((file)=>{
+            return new Promise( (resolve , reject) => {
+                cloudinary.uploader.upload( files.path ,{
+                    public_id: uuid()
+                }, ( error , result ) => {
+                    if(error) return reject(error);
+                    resolve(result);
+                })
+            })
+        })
+
+        const results = await Promise.all(uploadPromises);
+
+        const formatedResults = results.map((result)=>({
+            public_id:result.public_id,
+            url: result.secure_url
+        }))
     } catch (error) {
         console.log(error)
     }
