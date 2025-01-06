@@ -61,7 +61,7 @@ export const newUser = async ( req , res ) => {
         const resuldOfTheFileUpload = await uploadFilesToCloudinary([file])
         const avatar = {
             public_id: resuldOfTheFileUpload[0].public_id,
-            url: resuldOfTheFileUpload[0].secureUrl
+            url: resuldOfTheFileUpload[0].url
         };
 
 
