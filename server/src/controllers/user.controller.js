@@ -1,7 +1,7 @@
 import { ChatModel } from "../models/chat.model.js";
 import { RequestModel } from "../models/request.model.js";
 import { UserModel } from "../models/user.model.js";
-import { emitEvent, sendRespons } from "../utils/features.js";
+import { emitEvent, sendRespons, uploadFilesToCloudinary } from "../utils/features.js";
 import { NEW_REQUEST, REFETCH_CHATS } from './../constants/events.js';
 import { otherMembers } from './../lib/helper.js';
 
@@ -53,12 +53,15 @@ export const newUser = async ( req , res ) => {
     try {
 
         const { name , userName , password } = req.body;
-        
+        const file = req.file
+
+        if (!file) return res.status(404).json({messages:"Please select the profile pic"})
         if( !name || !userName || !password ) return res.status(404).json({message:"All fields must be provided"})
 
+        const resuldOfTheFileUpload = await uploadFilesToCloudinary([file])
         const avatar = {
-            public_id: "test_public_id",
-            url: "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
+            public_id: resuldOfTheFileUpload[0].public_id,
+            url: resuldOfTheFileUpload[0].secureUrl
         };
 
 
