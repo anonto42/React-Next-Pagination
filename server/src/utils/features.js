@@ -72,7 +72,9 @@ export const uploadFilesToCloudinary = async ( files = [] ) => {
         const formatedResults = results.map((result)=>({
             public_id:result.public_id,
             url: result.secure_url
-        }))
+        }));
+
+        return formatedResults;
     } catch (error) {
         console.log(error)
     }
