@@ -12,6 +12,7 @@ import { randomUUID as uuid } from 'crypto';
 import { getSockets } from './src/utils/features.js';
 import { MessageModel } from './src/models/message.model.js';
 import cors from 'cors';
+import {v2 as cloudinary} from "cloudinary";
 
 const app = express();
 const server = createServer(app)
@@ -20,6 +21,11 @@ const userSocketIDs = new Map();
 
 const port = process.env.PORT || 3500;
 
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
+})
 
 dotenv.config({path:"./.env"});
 app.use(express.json());
