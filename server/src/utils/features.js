@@ -51,3 +51,11 @@ export const getSockets = async (users=[]) => {
         console.log(error.message)
     }
 }
+
+export const uploadFilesToCloudinary = async ( file = [] ) => {
+    try {
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
