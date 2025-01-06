@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { userSocketIDs } from "../../index.js";
 import { v2 as cloudinary } from 'cloudinary';
 import { v4 as uuid } from "uuid";
+import { getBase64 } from "../lib/helper.js";
 
 
 export const option = {
@@ -58,7 +59,9 @@ export const uploadFilesToCloudinary = async ( files = [] ) => {
     try {
         const uploadPromises = files.map((file)=>{
             return new Promise( (resolve , reject) => {
-                cloudinary.uploader.upload( files.path ,{
+                cloudinary.uploader.upload( 
+                    getBase64(file)
+                    ,{
                     public_id: uuid()
                 }, ( error , result ) => {
                     if(error) return reject(error);
