@@ -16,7 +16,6 @@ const Auth = () => {
   const name = useInputValidation("");
   const userName = useInputValidation("",userNameValidator);
   const password = useStrongPassword("");
-  const avatar = useFileHandler("single");
   const toogleLogin = () => setIsLogin(!isLogin);
   const dispatch = useDispatch()
 
@@ -33,8 +32,7 @@ const Auth = () => {
       const data = {
         name: name.value,
         userName: userName.value,
-        password: password.value,
-        avatar: avatar.file
+        password: password.value
       }
       const response = await axios.post(`${server}/api/userCreate`, data , config)
 
@@ -102,16 +100,6 @@ const Auth = () => {
             <>
             <Typography variant='h5'>Sign Up</Typography>
             <form style={{ width: "100%" , marginTop:"1rem"}} action='POST' >
-
-              <Stack position={"relative"} width={"10rem"} margin={"auto"}>
-                <Avatar sx={{width:"10rem",height:"10rem",objectFit:"contain"}} src={avatar.preview} />
-                <IconButton sx={{ position:"absolute" , bottom:"0" , right:"0", color:"white", bgcolor:"rgba(0,0,0,0.5)",":hover":{bgcolor:"rgba(0,0,0,0.7)"}}} component="label">
-                  <>
-                    <CamaraAltIcon />
-                    <VisuallyHidden type='file' onChange={avatar.changeHandler} />
-                  </>
-                </IconButton>
-              </Stack>
 
                 <TextField required fullWidth label="Full Name" margin='normal' variant='outlined' value={name.value} onChange={name.changeHandler} />
                 <TextField required fullWidth label="UserName" margin='normal' variant='outlined' value={userName.value} onChange={userName.changeHandler} />
