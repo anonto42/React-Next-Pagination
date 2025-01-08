@@ -18,16 +18,6 @@ const userSchema = new Schema({
     bio:{
         type: String,
         default:""
-    },
-    avatar:{
-        public_id:{
-            type:String,
-            required:true
-        },
-        url:{
-            type: String,
-            requird: true
-        }
     }
 },{timestamps:true});
 
