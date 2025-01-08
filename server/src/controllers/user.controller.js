@@ -56,18 +56,10 @@ export const newUser = async ( req , res ) => {
 
         if( !name || !userName || !password ) return res.status(404).json({message:"All fields must be provided"})
 
-        const resuldOfTheFileUpload = await uploadFilesToCloudinary([file])
-        const avatar = {
-            public_id: resuldOfTheFileUpload[0].public_id,
-            url: resuldOfTheFileUpload[0].url
-        };
-
-
         const userDataForCreate = {
             name,
             userName,
-            password,
-            avatar
+            password
         };
 
         const userFunded = await UserModel.findOne( { userName } );
