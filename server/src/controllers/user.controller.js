@@ -53,9 +53,7 @@ export const newUser = async ( req , res ) => {
     try {
 
         const { name , userName , password } = req.body;
-        const file = req.file
 
-        if (!file) return res.status(404).json({messages:"Please select the profile pic"})
         if( !name || !userName || !password ) return res.status(404).json({message:"All fields must be provided"})
 
         const resuldOfTheFileUpload = await uploadFilesToCloudinary([file])
