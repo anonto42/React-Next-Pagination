@@ -1,11 +1,14 @@
 import { AppBar, Backdrop, Box, IconButton, Toolbar, Tooltip, Typography } from '@mui/material'
 import React, { Suspense, useState } from 'react'
 import { orange } from '../../utils/color'
-import { Add, Group, Logout, Menu as MenuIcon , NotificationAdd, Notifications, Search } from '@mui/icons-material'
+import { Add, Group, Logout, Menu as MenuIcon , NotificationAdd, Notifications, Search } from '@mui/icons-material';
 import { useNavigate } from'react-router-dom'
 import SearchBox from './../Specific/Search';
 import NewGroupe from './../Specific/NewGroupe';
 import NotificationBox from './../Specific/Notification'
+import { server } from './../../libs/config';
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 const Header = () => {
 
@@ -28,7 +31,18 @@ const Header = () => {
     setIsNewGroup(!isNewGroup)
   }
   const NavigateToGroup = () => navigate('/group')
-  const logout = ()=> {}
+
+  const logout = async ()=> {
+    try {
+
+      axios.post(`${server}/logout`,{},{withCredentials:true})
+
+      toast.success("Logout success")
+      
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
 
   const Notification = ( ) => {
     setIsNotification(!isNotification)
