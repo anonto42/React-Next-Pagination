@@ -6,11 +6,14 @@ import ChatList from '../Specific/ChatList';
 import { chatsData } from '../../libs/sampleData';
 import { useParams } from 'react-router-dom';
 import Profile from '../Specific/Profile';
+import { useMyChatsQuery } from '../../redux/api/api';
 
 const AppLayout = () => WrappedComponent => {
   return (props) => {
     const params = useParams();
     const chatId = params.id
+    const { isLoading , data , isError , error , refetch } = useMyChatsQuery("");
+    console.log( data )
     return (
         <>
             <Title />
