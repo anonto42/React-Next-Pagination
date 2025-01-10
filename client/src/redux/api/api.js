@@ -9,15 +9,17 @@ const api = createApi(
                 baseUrl:`${server}/api/`
             }
         ),
-
+        tagTypes:["Chat"],
         endpoints:(builder)=>(
             {
                 myChats: builder.query({
                     query:()=>(
                         {
-                            url:"my"
+                            url:"my",
+                            credentials:"include"
                         }
-                    )
+                    ),
+                    providesTags:["Chat"]
                 })
             }
         )
@@ -25,3 +27,4 @@ const api = createApi(
 )
 
 export default api;
+export const { useMyChatsQuery } = api;
