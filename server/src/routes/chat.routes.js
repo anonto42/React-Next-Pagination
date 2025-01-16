@@ -9,7 +9,7 @@ chatRouter.use(isAuthenticated)
 
 chatRouter.route("/new").post( newGroup )
 
-chatRouter.route("/my").post( myChat )
+chatRouter.route("/my").get( myChat )
 
 chatRouter.route("/my/groups").post( myGroupChat )
 
