@@ -6,7 +6,7 @@ const api = createApi(
         reducerPath:"api",
         baseQuery:fetchBaseQuery(
             {
-                baseUrl:`${server}/api/`
+                baseUrl:`${server}/api/chat/`
             }
         ),
         tagTypes:["Chat"],
