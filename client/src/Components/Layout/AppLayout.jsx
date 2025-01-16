@@ -12,7 +12,7 @@ const AppLayout = () => WrappedComponent => {
   return (props) => {
     const params = useParams();
     const chatId = params.id
-    const { isLoading , data , isError , error , refetch } = useMyChatsQuery("");
+    const { isLoading , data , isError , error , refetch } = useMyChatsQuery();
     console.log( data )
     return (
         <>
