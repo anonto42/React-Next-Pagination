@@ -22,57 +22,15 @@ const ChatManagemet = lazy(() => import("./pages/ChateManagement"))
 
 const App = () => {
 
-  const dispatch = useDispatch()
-  const { user , loader } = useSelector((state)=>state.auth )
-  const userSlice = useSelector((state)=>state.userSlice )
-  const config = {
-    withCredentials: true,
-    headers:{
-      "Content-Type":"application/json"
-    }
-  };
-
-  const profile = async (params) => {
-      try {
-        const response = await axios.post(`${server}/api/user`,{},config)
-        if(response.data.success === true) {
-          dispatch(userExists(true))
-          dispatch(setJoined(response.data.user.createdAt))
-          dispatch(
-            setAvatar(response.data.user.avatar)
-          )
-          dispatch(
-            setBio(response.data.user.bio)
-          )
-          dispatch(
-            setUserName(response.data.user.userName)
-          )  
-          dispatch(
-            setName(response.data.user.name)
-          )
-        }
-      } catch (error) {
-        dispatch(userNotExist())
-      }
-    }
-  useEffect(()=>{
-    profile()
-  },[dispatch])
-
-  return loader? ( <Loaders />) : (
+  return (
     <BrowserRouter>
       <Suspense fallback={<Loaders />}>
-        <Routes>
-          <Route element={<ProtectRoute user={user} />} >
+      <Routes > 
             <Route path="/" element={ <Home/> } />
             <Route path="/chat/:id" element={<Chat/>} />
             <Route path="/group" element={<Group/>} />
-          </Route>
           <Route path="/auth" element={
-            <ProtectRoute user={!user} redirect='/' >
-              <Auth/>
-            </ProtectRoute>
-            } />
+              <Auth/>} />
 
             <Route path='/admin' element={<AdminLogin />} />
             <Route path='/admin/dashboard' element={<Admin />} />
@@ -85,7 +43,7 @@ const App = () => {
       </Suspense>
       <Toaster position='bottom-center' />
     </BrowserRouter>
-  )
+  )    
 }
 
 export default App

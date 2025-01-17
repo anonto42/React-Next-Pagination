@@ -58,7 +58,7 @@ const notificationData = [
    {
       sender:{
          avatar: "",
-         name:"Banchod"
+         name:"Safiul islam"
       },
       _id:"3"
    },
@@ -83,7 +83,7 @@ const sampleMessage = [
    {
       attachments:[
       ],
-      content:"Fuck you bro and I will fuck your as...",
+      content:"Nice pic",
       sender:{
          _id:"askdasdf",
          name:"sohidul islam ananto"
