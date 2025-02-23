@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
-import { twMerge } from "tailwind-merge";
 
-const dmSans = DM_Sans({ subsets: ["latin"] });
+const DMSans = DM_Sans({subsets: ["latin"]});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={twMerge(dmSans.className,"antialiased bg-[#DADDFE]")}
+        className={`${DMSans.className} antialiased bg-[#EFEEFE]`}
       >
         {children}
       </body>
