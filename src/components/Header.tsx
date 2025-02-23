@@ -8,7 +8,7 @@ import Logo from "@/assets/logosaas.png";
 
 const Header = () => {
   return (
-    <header className='sticky top-0'>
+    <header className='sticky top-0 backdrop-blur-sm z-20'>
       <div className='flex justify-center text-sm items-center py-3 text-white bg-[#000000] gap-3'>
         <p className='text-white/60 hidden md:block'>
           Streamline your workflow and boost your productivity
