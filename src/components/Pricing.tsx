@@ -65,7 +65,7 @@ const Pricing = () => {
         <div className='flex flex-col gap-6 items-center mt-10 lg:flex-row lg:items-end lg:justify-center'>
           {
             pricingTiers.map(({ title , monthlyPrice , buttonText , popular , inverse , features },index)=>(
-              <div key={index} className={`p-10 rounded-3xl w-full max-w-xs shadow-[0_7px_14px_#eaeaea] ${ inverse === true? "border-black bg-black text-white":"border border-[#f1f1f1] bg-white" }`}>
+              <div key={index} className={`card ${ inverse === true? "border-black bg-black text-white":"border border-[#f1f1f1] bg-white" }`}>
                 <div className='flex justify-between'>
                   <h3 className={`text-lg font-bold ${inverse === true?"text-white/60":"text-black/50"}`}>{title}</h3>
                   {
