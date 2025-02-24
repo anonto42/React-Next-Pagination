@@ -9,10 +9,10 @@ import noodleImage from "@/assets/noodle.png";
 const Hero = () => {
   return (
     <section className='pt-8 pb-20 md:pt-5 md:pb-10 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#183EC2,#EAEEFE_100%)] overflow-x-clip'>
-        <div className='container mx-auto px-5 md:px-0'>
+        <div className='container mx-auto px-5 xl:px-0'>
             <div className='md:flex items-center'>
                 <div className='md:w-[478px]'>
-                    <div className='text-sm inline-flex border border-[#222]/10 px-3 py-1 rounded-lg tracking-tight mb-2'>Version 2.0 here</div>
+                    <div className='tag'>Version 2.0 here</div>
                     <h1 className='text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#001e80] text-transparent bg-clip-text'>Pathway to productivity</h1>
                     <p className='text-xl text-[#010D3E] tracking-tight mt-6'>
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis magni, culpa deserunt adipisci dignissimos qui repudiandae accusamus delectus dolor sit natus quos explicabo modi nesciunt nihil,

@@ -18,7 +18,7 @@ const Header = () => {
           <FaLongArrowAltRight className='mt-[1px]' />
         </div>
       </div>
-      <div className='py-5 px-5 md:px-0'>
+      <div className='py-5 px-5 xl:px-0'>
         <div className='text-4xl container mx-auto'>
           <div className='flex items-center justify-between'>
             <Image src={Logo} alt='Sas logo' height={40} width={40} loading='lazy' />
