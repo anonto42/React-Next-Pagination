@@ -12,7 +12,7 @@ const ProductShowCase = () => {
                 <div className='flex justify-center'>
                     <div className='tag'>Boost your productivity</div>
                 </div>
-                <h2 className='text-center text-3xl md:text-[54px] md:leading-[60px] font-bold tracking-tighter bg-gradient-to-b from-black to-[#001e80] text-transparent bg-clip-text'>A more effective way to track progress</h2>
+                <h2 className='section-title'>A more effective way to track progress</h2>
                 <p className='text-center text-[22px] leading-[30px] tracking-tight text-[#010d3e] mt-5'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore voluptatum dolorem ipsam alias perspiciatis obcaecati exercitationem tempore perferendis.!</p>
             </div>
             <div className='relative'>
