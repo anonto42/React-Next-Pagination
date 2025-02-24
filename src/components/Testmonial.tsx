@@ -99,7 +99,7 @@ const TestmonialsColum = ( props : { className?: string ; testmonial : typeof te
 const Testmonial = () => {
   return (
     <section>
-      <div className='bg-white/60 rounded-md'>
+      <div className='bg-white/60 rounded-md pb-10'>
         <div className='flex justify-center'>
           <div className='tag mt-6 text-xl'>Testmonial</div>
         </div>
