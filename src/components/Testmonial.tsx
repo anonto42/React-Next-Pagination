@@ -8,6 +8,7 @@ import avatar6 from "@/assets/avatar-6.png";
 import avatar7 from "@/assets/avatar-7.png";
 import avatar8 from "@/assets/avatar-8.png";
 import avatar9 from "@/assets/avatar-9.png";
+import Image from 'next/image';
 
 const testimonials = [
   {
@@ -66,9 +67,51 @@ const testimonials = [
   },
 ];
 
+const firstColum = testimonials.slice(0,3);
+const secondColumn = testimonials.slice(3,6);
+const thirdColumn = testimonials.slice(6,9);
+
+const TestmonialsColum = ( props : { className?: string ; testmonial : typeof testimonials }) => (
+  <div className={`${props.className} flex flex-col gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]`}>
+    {
+      props.testmonial.map(({ text, imageSrc, name, username },index)=>(
+        <div key={index} className='card'>
+          <div>{text}</div>
+          <div className='flex items-center gap-2 mt-5'>
+            <Image 
+              src={imageSrc}
+              alt='name'
+              height={40}
+              width={40}
+              className='h-10 w-10 rounded-full'
+             />
+             <div className='flex flex-col'>
+               <div className='font-medium tracking-tight leading-5'>{name}</div>
+               <div className='leading-5 tracking-tight'>{username}</div>
+             </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+)
+
 const Testmonial = () => {
   return (
-    <div>Testmonial</div>
+    <section>
+      <div className='bg-white/60 rounded-md'>
+        <div className='flex justify-center'>
+          <div className='tag mt-6 text-xl'>Testmonial</div>
+        </div>
+        <h2 className='section-title mt-5'>What our users say</h2>
+        <p className='section-discription mt-5 max-w-2xl mx-auto'>From intuitive design to powerful features, out app has become an essentail tool for users around the world.</p>
+        <div className='flex justify-center gap-6'>
+          <TestmonialsColum testmonial={firstColum}/>
+          <TestmonialsColum testmonial={secondColumn} className='hidden md:flex'/>
+          <TestmonialsColum testmonial={thirdColumn} className='hidden lg:flex'/>
+        </div>
+      </div>
+    </section>
   )
 }
 
