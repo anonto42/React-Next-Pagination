@@ -13,7 +13,7 @@ const ProductShowCase = () => {
                     <div className='tag'>Boost your productivity</div>
                 </div>
                 <h2 className='section-title'>A more effective way to track progress</h2>
-                <p className='text-center text-[22px] leading-[30px] tracking-tight text-[#010d3e] mt-5'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore voluptatum dolorem ipsam alias perspiciatis obcaecati exercitationem tempore perferendis.!</p>
+                <p className='mt-5 section-discription'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore voluptatum dolorem ipsam alias perspiciatis obcaecati exercitationem tempore perferendis.!</p>
             </div>
             <div className='relative'>
                 <Image 
