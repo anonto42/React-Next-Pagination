@@ -16,4 +16,4 @@ Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/anonto42/landing-page.git
 cd landing-page
-npm install
+npm install && npm run dev
