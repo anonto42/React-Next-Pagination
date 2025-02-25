@@ -1,6 +1,6 @@
 "use client"
-import React, { useRef } from 'react';
-import { motion , useScroll , useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import CheckIcon from "@/assets/check.svg";
 import Image from 'next/image';
 
