@@ -1,6 +1,6 @@
 "use client"
-import React, { useRef } from 'react';
-import { motion , useScroll , useTransform } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import avatar1 from "@/assets/avatar-1.png";
 import avatar2 from "@/assets/avatar-2.png";
 import avatar3 from "@/assets/avatar-3.png";
