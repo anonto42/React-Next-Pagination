@@ -1,12 +1,24 @@
-import React from 'react';
+"use client"
+import React, { useRef } from 'react';
+import { motion , useScroll , useTransform } from 'framer-motion';
 import productImage from "@/assets/product-image.png";
 import pyramidImage from "@/assets/pyramid.png";
 import tubemage from "@/assets/tube.png";
 import Image from 'next/image';
 
 const ProductShowCase = () => {
+    const productRef = useRef(null);
+    const { scrollYProgress } = useScroll(
+        {
+            target: productRef,
+            offset:["start end" , "end start"]
+        }
+    )
+    const translateY = useTransform( scrollYProgress , [0,1],[150,-150])
   return (
-    <section className='bg-gradient-to-b from-[#ffff] to-[#d2dcff] py-24 px-5 xl:px-0 overflow-x-clip'>
+    <section 
+        ref={productRef}
+        className='bg-gradient-to-b from-[#ffff] to-[#d2dcff] py-24 px-5 xl:px-0 overflow-x-clip'>
         <div className='container mx-auto'>
             <div className='max-w-[540px] mx-auto'>
                 <div className='flex justify-center'>
@@ -22,21 +34,31 @@ const ProductShowCase = () => {
                     className='mt-10' 
                     loading='lazy'
                 />
-                <Image 
-                    src={pyramidImage} 
+                <motion.img 
+                    src={pyramidImage.src} 
                     alt='Pyramid image' 
                     height={262}
                     width={262}
                     className='absolute -right-36 -top-32 hidden md:block' 
                     loading='lazy'
+                    style={
+                        {
+                            translateY,
+                        }
+                    }
                 />
-                <Image 
-                    src={tubemage} 
+                <motion.img 
+                    src={tubemage.src} 
                     alt='Product image' 
                     height={248}
                     width={248}
                     className='absolute bottom-24 -left-36 hidden md:block' 
                     loading='lazy'
+                    style={
+                        {
+                            translateY,
+                        }
+                    }
                 />
             </div>
         </div>
